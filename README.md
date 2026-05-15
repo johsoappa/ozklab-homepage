@@ -59,6 +59,18 @@ Vercel에 main 브랜치를 push하면 자동 배포됩니다.
 
 > 문의 이메일은 추후 실제 이메일 또는 카카오채널 링크로 교체 가능하도록 `contact@ozklab.kr` 임시 사용.
 
+## 로고 에셋
+
+| 파일 | 경로 | 용도 |
+|------|------|------|
+| 풀 로고 (투명 PNG) | `public/images/ozk-lab-logo.png` | Header · Footer |
+
+- Header: `height: 38px, width: auto` (portrait 로고 비율 유지)
+- Footer: `width: 128px, height: auto`
+- **추후 필요 작업**:
+  - Favicon용 심볼 버전 별도 제작 필요 (현재 풀 로고는 favicon으로 부적합)
+  - Open Graph(OG) 공유 이미지 별도 제작 필요
+
 ## Tailwind CSS v4 참고
 
 이 프로젝트는 Tailwind CSS v4를 사용합니다. v4에서는 `tailwind.config.ts` 대신

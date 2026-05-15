@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import {
   Zap,
@@ -67,8 +68,15 @@ function Nav() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="font-bold text-xl text-gray-900">
-            OZ.K <span style={{ color: PRIMARY }}>Lab</span>
+          <a href="#" className="flex items-center">
+            <Image
+              src="/images/ozk-lab-logo.png"
+              alt="OZ.K Lab"
+              width={120}
+              height={132}
+              style={{ height: "38px", width: "auto" }}
+              priority
+            />
           </a>
 
           {/* Desktop */}
@@ -681,10 +689,16 @@ export default function Home() {
       <footer className="py-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between gap-8">
-            {/* ⑥ Footer 왼쪽 — keep-all + whitespace-nowrap */}
+            {/* Footer 왼쪽 — 로고 이미지 + 설명 */}
             <div className="max-w-[260px]">
-              <div className="font-bold text-lg text-gray-900 mb-2.5">
-                OZ.K <span style={{ color: PRIMARY }}>Lab</span>
+              <div className="mb-3">
+                <Image
+                  src="/images/ozk-lab-logo.png"
+                  alt="OZ.K Lab"
+                  width={120}
+                  height={132}
+                  style={{ width: "128px", height: "auto" }}
+                />
               </div>
               <p
                 className="text-sm text-gray-500"
