@@ -1,36 +1,67 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# OZ.K Lab 공식 홈페이지
 
-## Getting Started
+OZ.K Lab 공식 홈페이지 — AI와 자동화로 현실에 쓰이는 서비스를 만드는 실행형 연구소.
 
-First, run the development server:
+## 기술 스택
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript
+- **Styling**: Tailwind CSS v4
+- **Animation**: Framer Motion
+- **Icons**: Lucide React
+- **Font**: Pretendard (CDN)
+- **Deployment**: Vercel
+- **Domain**: ozklab.kr
+
+## 브랜드 구조
+
+| 브랜드 | 역할 |
+|--------|------|
+| **OZ.K Lab** | 공식 사업자명 / 운영사 / 전체 기술 브랜드 |
+| **좋소아빠 자동화** | 작은 회사·실무자를 위한 업무 자동화 솔루션 브랜드 |
+| **꿈따라** | OZ.K Lab이 운영하는 자녀 진로탐색 서비스 |
+| **명따라** | 생년월일 기반 자기이해 리포트 (Birth Code Analysis) |
+
+## 페이지 섹션
+
+1. Hero
+2. About OZ.K Lab
+3. Services (좋소아빠 자동화 / 꿈따라 / 명따라)
+4. AI Workflow (기획 · 구현 · 전략)
+5. Portfolio
+6. 명따라
+7. Contact
+8. Footer
+
+## 로컬 개발
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 빌드 & 배포
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build   # 프로덕션 빌드
+npm start       # 프로덕션 서버 실행
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Vercel에 main 브랜치를 push하면 자동 배포됩니다.
 
-## Learn More
+## 링크 관리
 
-To learn more about Next.js, take a look at the following resources:
+| 항목 | 링크 |
+|------|------|
+| 꿈따라 서비스 | https://꿈따라.kr |
+| 문의 이메일 | contact@ozklab.kr |
+| GitHub | https://github.com/johsoappa/ozklab-homepage |
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+> 문의 이메일은 추후 실제 이메일 또는 카카오채널 링크로 교체 가능하도록 `contact@ozklab.kr` 임시 사용.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Tailwind CSS v4 참고
 
-## Deploy on Vercel
+이 프로젝트는 Tailwind CSS v4를 사용합니다. v4에서는 `tailwind.config.ts` 대신
+`app/globals.css`의 `@theme` 블록으로 디자인 토큰을 관리합니다.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Primary Color: `#E85D30` (CSS 변수: `--primary`)
