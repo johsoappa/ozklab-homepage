@@ -61,14 +61,19 @@ Vercel에 main 브랜치를 push하면 자동 배포됩니다.
 
 ## 로고 에셋
 
-| 파일 | 경로 | 용도 |
+| 파일 | 경로 | 상태 |
 |------|------|------|
-| 풀 로고 (투명 PNG) | `public/images/ozk-lab-logo.png` | Header · Footer |
+| 풀 로고 | `public/images/ozk-lab-logo.png` | ⚠️ 배경 포함 — 교체 필요 |
 
-- Header: `height: 38px, width: auto` (portrait 로고 비율 유지)
-- Footer: `width: 128px, height: auto`
+> **⚠️ 현재 로고 파일 주의사항**
+> `public/images/ozk-lab-logo.png`는 체커보드 배경이 픽셀에 포함된 상태입니다.
+> 진짜 투명 배경(알파 채널)이 있는 PNG 또는 SVG 파일로 교체해야 합니다.
+> 교체 시 동일 경로(`public/images/ozk-lab-logo.png`)에 덮어쓰면 됩니다.
+
+- Header/Footer는 현재 텍스트 로고로 임시 적용 중
+- 투명 PNG/SVG 파일 준비 후 `next/image`로 교체 예정
 - **추후 필요 작업**:
-  - Favicon용 심볼 버전 별도 제작 필요 (현재 풀 로고는 favicon으로 부적합)
+  - Favicon용 심볼 버전 별도 제작 필요
   - Open Graph(OG) 공유 이미지 별도 제작 필요
 
 ## Tailwind CSS v4 참고
