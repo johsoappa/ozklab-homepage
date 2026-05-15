@@ -155,6 +155,38 @@ const heroCards = [
   },
 ];
 
+/* 명따라 섹션 소카드 — ReactNode로 줄바꿈 제어 */
+type MiniCard = { label: string; desc: React.ReactNode };
+const myeongCards: MiniCard[] = [
+  {
+    label: "성향 분석",
+    desc: (
+      <>
+        나만의 기질과{" "}
+        <span className="whitespace-nowrap">반복 패턴 파악</span>
+      </>
+    ),
+  },
+  {
+    label: "강점 정리",
+    desc: (
+      <>
+        일과 관계에서의{" "}
+        <span className="whitespace-nowrap">자연스러운 강점</span>
+      </>
+    ),
+  },
+  {
+    label: "방향성 제안",
+    desc: (
+      <>
+        현실적인 선택을 위한{" "}
+        <span className="whitespace-nowrap">참고 인사이트</span>
+      </>
+    ),
+  },
+];
+
 export default function Home() {
   return (
     <main className="font-sans">
@@ -180,7 +212,8 @@ export default function Home() {
                 <Zap size={13} />
                 AI × 자동화 × 디지털 솔루션
               </div>
-              <h1 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5"
+              <h1
+                className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5"
                 style={{ lineHeight: "1.2" }}
               >
                 AI와 자동화로
@@ -189,11 +222,14 @@ export default function Home() {
                 <br />
                 서비스를 만듭니다.
               </h1>
-              <p className="text-base sm:text-lg text-gray-500 mb-8"
-                style={{ lineHeight: "1.8" }}
+              {/* ① Hero 설명 문구 — "업무 자동화까지," → "업무 자동화," + keep-all */}
+              <p
+                className="text-base sm:text-lg text-gray-500 mb-8 max-w-md"
+                style={{ lineHeight: "1.85", wordBreak: "keep-all" }}
               >
-                OZ.K Lab은 아이의 진로 탐색부터 작은 조직의 업무 자동화까지,
-                생활과 현장에서 바로 쓰이는 디지털 솔루션을 설계합니다.
+                OZ.K Lab은 아이의 진로 탐색부터 작은 조직의 업무 자동화,
+                생활과 현장에서 바로 쓰이는{" "}
+                <span className="whitespace-nowrap">디지털 솔루션을 설계합니다.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
@@ -235,7 +271,12 @@ export default function Home() {
                     {card.icon}
                   </div>
                   <p className="text-sm font-semibold text-gray-900 mb-1">{card.title}</p>
-                  <p className="text-xs text-gray-500 leading-relaxed">{card.desc}</p>
+                  <p
+                    className="text-xs text-gray-500"
+                    style={{ lineHeight: "1.65", wordBreak: "keep-all" }}
+                  >
+                    {card.desc}
+                  </p>
                   {card.link && (
                     <a
                       href={card.link}
@@ -258,6 +299,7 @@ export default function Home() {
       <section id="about" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
+            {/* ② About 섹션 — 명시적 줄바꿈 + keep-all + whitespace-nowrap */}
             <div className="max-w-2xl mx-auto text-center">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
@@ -270,10 +312,16 @@ export default function Home() {
                 <br />
                 실행형 연구소
               </h2>
-              <p className="text-base text-gray-600" style={{ lineHeight: "1.9" }}>
-                OZ.K Lab은 현실에 쓰이는 디지털 솔루션을 만드는 실행형 연구소입니다.
+              <p
+                className="text-base text-gray-600 max-w-xl mx-auto"
+                style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+              >
+                OZ.K Lab은 현실에 쓰이는 디지털 솔루션을 만드는{" "}
+                <span className="whitespace-nowrap">실행형 연구소입니다.</span>
+                <br />
                 AI, 웹앱, 엑셀, 구글시트 자동화 기술을 활용해
-                작은 조직과 개인이 바로 사용할 수 있는 실무형 시스템을 설계합니다.
+                작은 조직과 개인이 바로 사용할 수 있는{" "}
+                <span className="whitespace-nowrap">실무형 시스템을 설계합니다.</span>
               </p>
             </div>
           </FadeIn>
@@ -304,7 +352,8 @@ export default function Home() {
                 tag: "업무 자동화",
                 title: "좋소아빠 자동화",
                 subtitle: null as string | null,
-                desc: "작은 회사와 실무자를 위한 업무 자동화 솔루션입니다. 엑셀, 구글시트, 웹앱, AI를 활용해 반복 입력, 집계, 보고서 작성, 업무 추적 과정을 줄이고 현장에서 바로 사용할 수 있는 시스템을 만듭니다.",
+                /* ③ 좋소아빠 카드 — 말미 orphan 방지: 문장 재구성 */
+                desc: "작은 회사와 실무자를 위한 업무 자동화 솔루션입니다. 엑셀, 구글시트, 웹앱, AI를 활용해 반복 작업과 보고서 작성을 줄이고, 현장에서 바로 쓸 수 있는 실무형 시스템을 만듭니다.",
                 link: null as string | null,
               },
               {
@@ -342,7 +391,12 @@ export default function Home() {
                   {svc.subtitle && (
                     <p className="text-xs text-gray-400 mb-2.5">{svc.subtitle}</p>
                   )}
-                  <p className="text-sm text-gray-600 leading-relaxed flex-1">{svc.desc}</p>
+                  <p
+                    className="text-sm text-gray-600 flex-1"
+                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                  >
+                    {svc.desc}
+                  </p>
                   {svc.link && (
                     <a
                       href={svc.link}
@@ -365,6 +419,7 @@ export default function Home() {
       <section id="ai-workflow" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
+            {/* ④ AI Workflow — 설명 max-w 확장 + keep-all */}
             <div className="text-center mb-10">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
@@ -377,9 +432,13 @@ export default function Home() {
                 <br />
                 AI 워크플로우
               </h2>
-              <p className="text-gray-500 max-w-md mx-auto text-sm" style={{ lineHeight: "1.8" }}>
+              <p
+                className="text-gray-500 max-w-lg mx-auto text-sm"
+                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
+              >
                 아이디어 기획부터 시스템 구현, 서비스 전략까지
                 AI를 활용해 통합적으로 설계합니다.
+                아이디어가 현실이 되는 흐름을 OZ.K Lab이 함께 설계합니다.
               </p>
             </div>
           </FadeIn>
@@ -417,7 +476,12 @@ export default function Home() {
                     {item.icon}
                   </div>
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed">{item.desc}</p>
+                  <p
+                    className="text-sm text-gray-600"
+                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                  >
+                    {item.desc}
+                  </p>
                 </div>
               </FadeIn>
             ))}
@@ -476,7 +540,12 @@ export default function Home() {
                     {item.category}
                   </span>
                   <h3 className="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p className="text-sm text-gray-600 leading-relaxed flex-1">{item.desc}</p>
+                  <p
+                    className="text-sm text-gray-600 flex-1"
+                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                  >
+                    {item.desc}
+                  </p>
                   {item.link && (
                     <a
                       href={item.link}
@@ -514,28 +583,38 @@ export default function Home() {
 
             <FadeIn delay={0.1}>
               <div className="bg-white rounded-2xl p-7 sm:p-9 border border-gray-100">
-                <p className="text-gray-700 text-sm sm:text-base mb-4" style={{ lineHeight: "1.9" }}>
+                <p
+                  className="text-gray-700 text-sm sm:text-base mb-4"
+                  style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+                >
                   명따라는 생년월일과 전통 상징 체계를 바탕으로
-                  성향, 강점, 반복 패턴, 일의 방향성을 정리하는 자기이해 리포트입니다.
+                  성향, 강점, 반복 패턴, 일의 방향성을 정리하는{" "}
+                  <span className="whitespace-nowrap">자기이해 리포트입니다.</span>
                 </p>
-                <p className="text-gray-700 text-sm sm:text-base mb-7" style={{ lineHeight: "1.9" }}>
-                  예언이나 확정적 판단이 아니라,
-                  나를 더 잘 이해하고 현실적인 선택을 돕기 위한 참고형 인사이트 콘텐츠입니다.
+                <p
+                  className="text-gray-700 text-sm sm:text-base mb-7"
+                  style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+                >
+                  예언이나 확정적 판단이 아니라, 나를 더 잘 이해하고
+                  현실적인 선택을 돕기 위한{" "}
+                  <span className="whitespace-nowrap">참고형 인사이트 콘텐츠입니다.</span>
                 </p>
 
+                {/* ⑤ 명따라 소카드 — ReactNode로 줄바꿈 정밀 제어 */}
                 <div className="grid sm:grid-cols-3 gap-3">
-                  {[
-                    { label: "성향 분석", desc: "나만의 기질과 반복 패턴 파악" },
-                    { label: "강점 정리", desc: "일과 관계에서의 자연스러운 강점" },
-                    { label: "방향성 제안", desc: "현실적인 선택을 위한 참고 인사이트" },
-                  ].map((item, i) => (
+                  {myeongCards.map((item, i) => (
                     <div key={i} className="bg-gray-50 rounded-xl p-4">
                       <div
                         className="w-2 h-2 rounded-full mb-2.5"
                         style={{ backgroundColor: PRIMARY }}
                       />
                       <p className="font-semibold text-gray-900 text-sm mb-1">{item.label}</p>
-                      <p className="text-xs text-gray-500 leading-relaxed">{item.desc}</p>
+                      <p
+                        className="text-xs text-gray-500"
+                        style={{ lineHeight: "1.65", wordBreak: "keep-all" }}
+                      >
+                        {item.desc}
+                      </p>
                     </div>
                   ))}
                 </div>
@@ -561,12 +640,18 @@ export default function Home() {
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
                 함께 만들어 갑시다
               </h2>
-              <p className="text-gray-500 mb-2 text-sm sm:text-base" style={{ lineHeight: "1.85" }}>
+              <p
+                className="text-gray-500 mb-2 text-sm sm:text-base"
+                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
+              >
                 현재 OZ.K Lab의 공식 문의 채널을 준비 중입니다.
               </p>
-              <p className="text-gray-500 mb-8 text-sm sm:text-base" style={{ lineHeight: "1.85" }}>
-                자동화 솔루션, 꿈따라 제휴, 명따라 리포트 관련 문의는
-                곧 안내드리겠습니다.
+              <p
+                className="text-gray-500 mb-8 text-sm sm:text-base"
+                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
+              >
+                자동화 솔루션, 꿈따라 제휴, 명따라 리포트 관련 문의는{" "}
+                <span className="whitespace-nowrap">곧 안내드리겠습니다.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <button
@@ -596,12 +681,17 @@ export default function Home() {
       <footer className="py-12 border-t border-gray-100">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between gap-8">
-            <div className="max-w-xs">
+            {/* ⑥ Footer 왼쪽 — keep-all + whitespace-nowrap */}
+            <div className="max-w-[260px]">
               <div className="font-bold text-lg text-gray-900 mb-2.5">
                 OZ.K <span style={{ color: PRIMARY }}>Lab</span>
               </div>
-              <p className="text-sm text-gray-500 leading-relaxed">
-                AI와 자동화로 현실에 쓰이는 서비스를 만드는 실행형 연구소입니다.
+              <p
+                className="text-sm text-gray-500"
+                style={{ lineHeight: "1.75", wordBreak: "keep-all" }}
+              >
+                AI와 자동화로 현실에 쓰이는 서비스를 만드는{" "}
+                <span className="whitespace-nowrap">실행형 연구소입니다.</span>
               </p>
             </div>
 
@@ -638,10 +728,17 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
-            <p className="text-xs text-gray-400">© OZ.K Lab. All rights reserved.</p>
-            <p className="text-xs text-gray-400">
-              OZ.K Lab은 좋소아빠 자동화, 꿈따라, 명따라를 운영하는 실행형 디지털 솔루션 브랜드입니다.
+          {/* ⑥ Footer 하단 — 브랜드 설명 줄바꿈 보정 */}
+          <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+            <p className="text-xs text-gray-400 whitespace-nowrap">
+              © OZ.K Lab. All rights reserved.
+            </p>
+            <p
+              className="text-xs text-gray-400 sm:text-right"
+              style={{ wordBreak: "keep-all" }}
+            >
+              OZ.K Lab은 좋소아빠 자동화, 꿈따라, 명따라를 운영하는{" "}
+              <span className="whitespace-nowrap">실행형 디지털 솔루션 브랜드입니다.</span>
             </p>
           </div>
         </div>
