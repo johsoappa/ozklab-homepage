@@ -695,34 +695,29 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 gap-8 text-sm">
-              <div>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
-                  자동화 솔루션
-                </p>
-                <p className="font-medium text-gray-700">좋소아빠 자동화</p>
-                <p className="text-xs text-gray-400 mt-1">실무 자동화 솔루션 브랜드</p>
-              </div>
-              <div>
-                <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-3">
-                  서비스
-                </p>
-                <div className="space-y-2">
-                  <div>
-                    <a
-                      href="https://꿈따라.kr"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="font-medium text-gray-700 hover:text-gray-900 transition-colors"
-                    >
-                      꿈따라
-                    </a>
-                    <p className="text-xs text-gray-400">자녀 진로탐색 서비스</p>
-                  </div>
-                  <div>
-                    <span className="font-medium text-gray-700">명따라</span>
-                    <p className="text-xs text-gray-400">자기이해 리포트</p>
-                  </div>
+            <div className="text-sm">
+              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
+                서비스
+              </p>
+              <div className="space-y-3">
+                <div>
+                  <p className="font-medium text-gray-700">좋소아빠 자동화</p>
+                  <p className="text-xs text-gray-400 mt-0.5">실무 자동화 솔루션</p>
+                </div>
+                <div>
+                  <a
+                    href="https://꿈따라.kr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                  >
+                    꿈따라
+                  </a>
+                  <p className="text-xs text-gray-400 mt-0.5">자녀 진로탐색 서비스</p>
+                </div>
+                <div>
+                  <span className="font-medium text-gray-700">명따라</span>
+                  <p className="text-xs text-gray-400 mt-0.5">자기이해 리포트</p>
                 </div>
               </div>
             </div>
