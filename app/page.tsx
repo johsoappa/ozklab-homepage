@@ -8,6 +8,7 @@ import {
   Target,
   ChevronRight,
   ArrowRight,
+  Mail,
   Briefcase,
   GraduationCap,
   BookOpen,
@@ -641,27 +642,21 @@ export default function Home() {
                 함께 만들어 갑시다
               </h2>
               <p
-                className="text-gray-500 mb-2 text-sm sm:text-base"
-                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
-              >
-                현재 OZ.K Lab의 공식 문의 채널을 준비 중입니다.
-              </p>
-              <p
                 className="text-gray-500 mb-8 text-sm sm:text-base"
                 style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
               >
-                자동화 솔루션, 꿈따라 제휴, 명따라 리포트 관련 문의는{" "}
-                <span className="whitespace-nowrap">곧 안내드리겠습니다.</span>
+                업무 자동화 도입, 꿈따라 제휴, 명따라 리포트 관련 문의는
+                아래 이메일로 연락해 주세요.
               </p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
-                <button
-                  type="button"
+                <a
+                  href="mailto:contact@ozklab.com"
                   className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
                   style={{ backgroundColor: PRIMARY }}
-                  onClick={() => {}}
                 >
-                  문의 채널 준비 중
-                </button>
+                  <Mail size={15} />
+                  문의하기
+                </a>
                 <a
                   href="https://꿈따라.kr"
                   target="_blank"
@@ -672,6 +667,15 @@ export default function Home() {
                   <ArrowRight size={15} />
                 </a>
               </div>
+              <p className="mt-5 text-sm text-gray-400">
+                <a
+                  href="mailto:contact@ozklab.com"
+                  className="hover:underline transition-colors"
+                  style={{ color: PRIMARY }}
+                >
+                  contact@ozklab.com
+                </a>
+              </p>
             </div>
           </FadeIn>
         </div>

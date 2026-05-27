@@ -54,10 +54,10 @@ Vercel에 main 브랜치를 push하면 자동 배포됩니다.
 | 항목 | 링크 |
 |------|------|
 | 꿈따라 서비스 | https://꿈따라.kr |
-| 문의 이메일 | contact@ozklab.kr |
+| 문의 이메일 | contact@ozklab.com |
 | GitHub | https://github.com/johsoappa/ozklab-homepage |
 
-> 문의 이메일은 추후 실제 이메일 또는 카카오채널 링크로 교체 가능하도록 `contact@ozklab.kr` 임시 사용.
+> 문의 이메일: `contact@ozklab.com`
 
 ## 로고 에셋
 
