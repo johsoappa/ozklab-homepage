@@ -639,7 +639,7 @@ export default function Home() {
                 Contact
               </p>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                함께 만들어 갑시다
+                OZ.K Lab에 문의하세요
               </h2>
               <p
                 className="text-gray-500 mb-8 text-sm sm:text-base"
