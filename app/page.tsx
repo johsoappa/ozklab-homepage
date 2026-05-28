@@ -308,22 +308,29 @@ export default function Home() {
               >
                 About OZ.K Lab
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5 leading-snug">
-                현실에 쓰이는 디지털 솔루션을 만드는
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5"
+                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+              >
+                현장의 어려움을 이해하고,
                 <br />
-                실행형 연구소
+                경험과 기술로 더 나은 환경을 만듭니다.
               </h2>
-              <p
-                className="text-base text-gray-600 max-w-xl mx-auto"
+              <div
+                className="text-base text-gray-600 max-w-xl mx-auto space-y-4"
                 style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
               >
-                OZ.K Lab은 현실에 쓰이는 디지털 솔루션을 만드는{" "}
-                <span className="whitespace-nowrap">실행형 연구소입니다.</span>
-                <br />
-                AI, 웹앱, 엑셀, 구글시트 자동화 기술을 활용해
-                작은 조직과 개인이 바로 사용할 수 있는{" "}
-                <span className="whitespace-nowrap">실무형 시스템을 설계합니다.</span>
-              </p>
+                <p>
+                  OZ.K Lab은 현장의 어려움을 이해하고, 경험과 기술을 바탕으로
+                  더 나은 업무 환경을 만드는{" "}
+                  <span className="whitespace-nowrap">디지털 솔루션을 설계합니다.</span>
+                </p>
+                <p>
+                  좋소아빠 자동화, 꿈따라, 명따라를 통해 반복 업무, 진로 탐색,
+                  자기이해를 더 쉽게 정리할 수 있는{" "}
+                  <span className="whitespace-nowrap">서비스를 만듭니다.</span>
+                </p>
+              </div>
             </div>
           </FadeIn>
         </div>
