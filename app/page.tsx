@@ -141,7 +141,7 @@ const heroCards = [
   {
     icon: <GraduationCap size={18} />,
     title: "꿈따라",
-    desc: "자녀 진로탐색 서비스",
+    desc: "막연한 꿈이 아닌, 실행 가능한 내일을 설계합니다",
     link: "https://꿈따라.kr",
   },
   {
