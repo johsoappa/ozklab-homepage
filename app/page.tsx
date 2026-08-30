@@ -24,6 +24,20 @@ import {
 
 const PRIMARY = "#E85D30";
 
+/* 한글 대제목 공통 규칙 — letter-spacing -0.03em, line-height 1.32, keep-all, balance */
+const TITLE_STYLE: React.CSSProperties = {
+  lineHeight: "1.32",
+  letterSpacing: "-0.03em",
+  wordBreak: "keep-all",
+  textWrap: "balance",
+};
+
+/* 본문·설명 문구 공통 규칙 — line-height 1.85, keep-all */
+const BODY_STYLE: React.CSSProperties = {
+  lineHeight: "1.85",
+  wordBreak: "keep-all",
+};
+
 function FadeIn({
   children,
   delay = 0,
@@ -285,17 +299,14 @@ export default function Home() {
               </div>
               <h1
                 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5"
-                style={{ lineHeight: "1.2", wordBreak: "keep-all" }}
+                style={TITLE_STYLE}
               >
                 고객관리부터 작업·정산까지,
                 <br />
                 <span style={{ color: PRIMARY }}>현장에 맞는 업무 시스템</span>
                 을 구축합니다.
               </h1>
-              <p
-                className="text-base sm:text-lg text-gray-500 mb-8 max-w-md"
-                style={{ lineHeight: "1.85", wordBreak: "keep-all" }}
-              >
+              <p className="text-base sm:text-lg text-gray-500 mb-8 max-w-md" style={BODY_STYLE}>
                 엑셀, 메신저, 종이와 담당자 기억에 흩어진 업무를 누구나 이어서{" "}
                 <span className="whitespace-nowrap">처리할 수 있는 운영 시스템으로 바꿉니다.</span>
               </p>
@@ -356,26 +367,23 @@ export default function Home() {
       </section>
 
       {/* ─── 고객 문제 ─── */}
-      <section id="problems" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      <section id="problems" className="py-20 sm:py-24" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-10">
+            <div className="mb-10 max-w-2xl">
               <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3"
-                style={{ wordBreak: "keep-all" }}
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4"
+                style={TITLE_STYLE}
               >
                 현장에서는 이런 문제로 업무가 멈춥니다.
               </h2>
-              <p
-                className="text-gray-500 max-w-lg mx-auto text-sm"
-                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
-              >
+              <p className="text-gray-500 max-w-xl text-sm" style={BODY_STYLE}>
                 툴을 하나 더 늘리기보다, 지금의 업무 흐름을 연결하는 구조가 먼저 필요합니다.
               </p>
             </div>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+          <div className="grid sm:grid-cols-2 gap-5">
             {problemCards.map((item, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div className="bg-white border border-gray-100 rounded-2xl p-6 h-full flex flex-col hover:shadow-md transition-all duration-300">
@@ -393,7 +401,7 @@ export default function Home() {
                   </h3>
                   <p
                     className="text-sm text-gray-600"
-                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                    style={BODY_STYLE}
                   >
                     {item.desc}
                   </p>
@@ -405,20 +413,17 @@ export default function Home() {
       </section>
 
       {/* ─── 솔루션 ─── */}
-      <section id="solutions" className="py-16 sm:py-20 bg-white">
+      <section id="solutions" className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-10">
+            <div className="mb-10 max-w-2xl">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
                 Solutions
               </p>
-              <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900"
-                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
-              >
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900" style={TITLE_STYLE}>
                 업무를 더 잘게 나누기보다,
                 <br />
                 한 번에 이어지도록 설계합니다.
@@ -445,7 +450,7 @@ export default function Home() {
                   <h3 className="text-lg font-bold text-gray-900 mb-2">{svc.title}</h3>
                   <p
                     className="text-sm text-gray-600 flex-1"
-                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                    style={BODY_STYLE}
                   >
                     {svc.desc}
                   </p>
@@ -457,10 +462,10 @@ export default function Home() {
       </section>
 
       {/* ─── 구축 사례 ─── */}
-      <section id="cases" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      <section id="cases" className="py-20 sm:py-24" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-10">
+            <div className="mb-10 max-w-2xl">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
@@ -468,21 +473,18 @@ export default function Home() {
                 Cases
               </p>
               <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3"
-                style={{ wordBreak: "keep-all" }}
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4"
+                style={TITLE_STYLE}
               >
                 현장의 흐름을 이해해 만든 구축 사례
               </h2>
-              <p
-                className="text-gray-500 max-w-lg mx-auto text-sm"
-                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
-              >
+              <p className="text-gray-500 max-w-xl text-sm" style={BODY_STYLE}>
                 업무를 단순히 디지털로 옮기지 않고, 담당자가 실제로 사용하는 흐름에 맞춰 설계합니다.
               </p>
             </div>
           </FadeIn>
 
-          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-6">
             {caseStudies.map((item, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 h-full flex flex-col">
@@ -502,7 +504,7 @@ export default function Home() {
                       </p>
                       <p
                         className="text-sm text-gray-600"
-                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                        style={BODY_STYLE}
                       >
                         {item.problem}
                       </p>
@@ -516,7 +518,7 @@ export default function Home() {
                       </p>
                       <p
                         className="text-sm text-gray-600"
-                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                        style={BODY_STYLE}
                       >
                         {item.approach}
                       </p>
@@ -530,7 +532,7 @@ export default function Home() {
                       </p>
                       <p
                         className="text-sm text-gray-600"
-                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                        style={BODY_STYLE}
                       >
                         {item.value}
                       </p>
@@ -544,20 +546,17 @@ export default function Home() {
       </section>
 
       {/* ─── 도입 절차 ─── */}
-      <section id="process" className="py-16 sm:py-20 bg-white">
+      <section id="process" className="py-20 sm:py-24 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-10">
+            <div className="mb-10 max-w-2xl">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
                 Process
               </p>
-              <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900"
-                style={{ wordBreak: "keep-all" }}
-              >
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900" style={TITLE_STYLE}>
                 우리 회사 업무에 맞게, 이렇게 시작합니다.
               </h2>
             </div>
@@ -579,7 +578,7 @@ export default function Home() {
                   <h3 className="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
                   <p
                     className="text-sm text-gray-600"
-                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                    style={BODY_STYLE}
                   >
                     {item.desc}
                   </p>
@@ -601,17 +600,14 @@ export default function Home() {
               >
                 About OZ.K Lab
               </p>
-              <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5"
-                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
-              >
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5" style={TITLE_STYLE}>
                 현장을 이해하고,
                 <br />
                 바로 쓰이는 시스템을 만듭니다.
               </h2>
               <div
                 className="text-base text-gray-600 max-w-xl mx-auto space-y-4"
-                style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+                style={BODY_STYLE}
               >
                 <p>
                   OZ.K Lab은 작은 조직과 현장 실무자가 실제로 겪는 업무 문제를 이해하고,
@@ -632,21 +628,21 @@ export default function Home() {
       <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            <div className="text-center mb-10">
+            <div className="mb-10 max-w-2xl">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
                 Services
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900" style={TITLE_STYLE}>
                 OZ.K Lab이 운영하는 서비스
               </h2>
             </div>
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <div className="max-w-xl mx-auto">
+            <div className="max-w-xl">
               <div className="border border-gray-100 rounded-2xl p-6 sm:p-7 flex items-center gap-5">
                 <div
                   className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
@@ -655,11 +651,8 @@ export default function Home() {
                   <GraduationCap size={24} />
                 </div>
                 <div className="flex-1">
-                  <h3 className="text-base font-bold text-gray-900 mb-1">꿈따라</h3>
-                  <p
-                    className="text-sm text-gray-600 mb-3"
-                    style={{ lineHeight: "1.7", wordBreak: "keep-all" }}
-                  >
+                  <h3 className="text-base font-bold text-gray-900 mb-1.5">꿈따라</h3>
+                  <p className="text-sm text-gray-600 mb-3" style={BODY_STYLE}>
                     자녀와 부모가 함께 직업을 탐색하고, 진로 대화를 시작할 수 있도록 돕는 진로탐색 서비스입니다.
                   </p>
                   <a
@@ -690,12 +683,19 @@ export default function Home() {
                 Contact
               </p>
               <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4"
-                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 max-w-sm mx-auto"
+                style={{
+                  lineHeight: "1.35",
+                  letterSpacing: "-0.01em",
+                  wordBreak: "keep-all",
+                  textWrap: "balance",
+                }}
               >
-                우리 회사의 업무 흐름,
+                우리 회사의 업무 흐름을
                 <br />
-                어디부터 정리하면 될지 함께 살펴보겠습니다.
+                어디부터 정리하면 좋을지
+                <br />
+                함께 살펴보겠습니다.
               </h2>
               <p
                 className="text-gray-500 mb-8 text-sm sm:text-base"
@@ -704,7 +704,7 @@ export default function Home() {
                 고객관리, A/S·QC, 업무일지, 보고 자동화처럼 반복되는 업무가 있다면{" "}
                 <span className="whitespace-nowrap">현재 사용 중인 방식부터 알려주세요.</span>
               </p>
-              <div className="flex flex-col items-center gap-3">
+              <div className="flex flex-col items-center gap-4">
                 <a
                   href={CONTACT_MAILTO}
                   className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
