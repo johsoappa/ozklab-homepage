@@ -3,16 +3,21 @@
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import {
-  Zap,
-  Brain,
-  Target,
-  ChevronRight,
+  Users,
+  Wrench,
+  FileText,
+  Layers,
+  ClipboardList,
+  History,
+  ScrollText,
+  Settings2,
+  Search,
+  Hammer,
+  RefreshCw,
   ArrowRight,
+  ChevronRight,
   Mail,
-  Briefcase,
   GraduationCap,
-  BookOpen,
-  Code2,
   Menu,
   X,
 } from "lucide-react";
@@ -53,11 +58,10 @@ function Nav() {
 
   const links = [
     { href: "#about", label: "소개" },
-    { href: "#services", label: "서비스" },
-    { href: "#ai-workflow", label: "AI 워크플로우" },
-    { href: "#portfolio", label: "포트폴리오" },
-    { href: "#myeongtara", label: "명따라" },
-    { href: "#contact", label: "문의" },
+    { href: "#solutions", label: "솔루션" },
+    { href: "#cases", label: "구축 사례" },
+    { href: "#process", label: "도입 절차" },
+    { href: "#services", label: "운영 서비스" },
   ];
 
   return (
@@ -88,7 +92,7 @@ function Nav() {
               className="ml-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-opacity hover:opacity-90"
               style={{ backgroundColor: PRIMARY }}
             >
-              문의하기
+              상담 신청
             </a>
           </div>
 
@@ -122,7 +126,7 @@ function Nav() {
                 style={{ backgroundColor: PRIMARY }}
                 onClick={() => setMenuOpen(false)}
               >
-                문의하기
+                상담 신청
               </a>
             </div>
           </div>
@@ -134,59 +138,125 @@ function Nav() {
 
 const heroCards = [
   {
-    icon: <Briefcase size={18} />,
-    title: "좋소아빠 자동화",
-    desc: "작은 회사와 실무자를 위한 업무 자동화 솔루션",
+    icon: <Users size={18} />,
+    title: "고객 정보가 흩어져 있나요?",
+    desc: "상담·작업·첨부 이력을 한곳에서 관리합니다.",
   },
   {
-    icon: <GraduationCap size={18} />,
-    title: "꿈따라",
-    desc: "막연한 꿈이 아닌, 실행 가능한 내일을 설계합니다",
-    link: "https://꿈따라.kr",
+    icon: <Wrench size={18} />,
+    title: "A/S·QC 이력이 이어지지 않나요?",
+    desc: "시리얼번호와 작업 이력을 기준으로 흐름을 정리합니다.",
   },
   {
-    icon: <BookOpen size={18} />,
-    title: "명따라",
-    desc: "생년월일 기반 자기이해 리포트",
-  },
-  {
-    icon: <Zap size={18} />,
-    title: "AI Workflow",
-    desc: "기획·구현·전략을 연결하는 실행 구조",
+    icon: <FileText size={18} />,
+    title: "보고와 안내문 작성이 반복되나요?",
+    desc: "업무 데이터를 기준으로 보고·안내 흐름을 자동화합니다.",
   },
 ];
 
-/* 명따라 섹션 소카드 — ReactNode로 줄바꿈 제어 */
-type MiniCard = { label: string; desc: React.ReactNode };
-const myeongCards: MiniCard[] = [
+const problemCards = [
   {
-    label: "성향 분석",
-    desc: (
-      <>
-        나만의 기질과{" "}
-        <span className="whitespace-nowrap">반복 패턴 파악</span>
-      </>
-    ),
+    icon: <Users size={24} />,
+    title: "고객 정보가 사람마다 다릅니다",
+    desc: "고객정보, 상담내용, 사진·첨부, 요청사항이 담당자별로 흩어집니다.",
   },
   {
-    label: "강점 정리",
-    desc: (
-      <>
-        일과 관계에서의{" "}
-        <span className="whitespace-nowrap">자연스러운 강점</span>
-      </>
-    ),
+    icon: <History size={24} />,
+    title: "작업 이력이 이어지지 않습니다",
+    desc: "접수, 수리, 재고, 비용, 발송 이력이 분리되어 이전 처리 내용을 찾기 어렵습니다.",
   },
   {
-    label: "방향성 제안",
-    desc: (
-      <>
-        현실적인 선택을 위한{" "}
-        <span className="whitespace-nowrap">참고 인사이트</span>
-      </>
-    ),
+    icon: <ScrollText size={24} />,
+    title: "보고와 안내가 수작업입니다",
+    desc: "업무일지, 업체 안내, 정산 자료를 반복해서 정리하고 복사해야 합니다.",
+  },
+  {
+    icon: <Settings2 size={24} />,
+    title: "기존 시스템이 현장에 맞지 않습니다",
+    desc: "현재 사용하는 ERP나 시트가 있어도 실제 담당자의 입력 흐름과 맞지 않는 경우가 많습니다.",
   },
 ];
+
+const solutionCards = [
+  {
+    tag: "CRM",
+    icon: <Users size={24} />,
+    title: "고객·상담 관리",
+    desc: "고객 기본정보, 상담내용, 사진·첨부, 요청사항과 이력을 한곳에서 관리합니다.",
+  },
+  {
+    tag: "A/S·QC",
+    icon: <Wrench size={24} />,
+    title: "A/S·리퍼·QC 관리",
+    desc: "접수부터 작업, 부품, 비용 안내, 발송, 이력 조회까지 운영 흐름을 연결합니다.",
+  },
+  {
+    tag: "Workflow",
+    icon: <ClipboardList size={24} />,
+    title: "업무일지·보고 자동화",
+    desc: "현장 입력 데이터를 기준으로 업무일지, 현황, 안내문, 보고 자료를 빠르게 정리합니다.",
+  },
+  {
+    tag: "Platform",
+    icon: <Layers size={24} />,
+    title: "맞춤형 운영 시스템",
+    desc: "기존 엑셀·구글시트·업무 도구의 흐름을 분석해 우리 조직에 맞는 웹 기반 운영 구조를 설계합니다.",
+  },
+];
+
+const caseStudies = [
+  {
+    title: "A/S·리퍼 업무일지 자동화",
+    problemLabel: "문제",
+    problem: "서비스 처리 대장 데이터를 매일 수작업으로 분류하고 업무일지를 작성해야 했습니다.",
+    approachLabel: "구축 방향",
+    approach:
+      "원본 데이터 복사·붙여넣기만으로 리퍼·A/S 분류, 동일 시리얼번호 기준 집계, 업체별 처리 내역과 담당자별 업무일지를 생성하도록 구성했습니다.",
+    valueLabel: "핵심 가치",
+    value: "반복 집계 시간을 줄이고, 팀원이 같은 기준으로 오늘의 업무를 공유할 수 있도록 했습니다.",
+  },
+  {
+    title: "A/S·QC 통합 운영관리 구조 설계",
+    problemLabel: "문제",
+    problem: "접수, 작업관리, 부품, 비용 안내, 장비 이력, 업무보고가 여러 자료와 담당자에게 나뉘어 있었습니다.",
+    approachLabel: "구축 방향",
+    approach:
+      "시리얼번호 기반 종전 이력 조회를 중심으로 접수·작업·부품·업체 안내·보고 흐름을 하나의 운영 플랫폼으로 연결하는 구조를 설계했습니다.",
+    valueLabel: "핵심 가치",
+    value: "담당자가 바뀌어도 누적 이력을 확인하고, 동일한 기준으로 업무를 이어갈 수 있습니다.",
+  },
+];
+
+const processSteps = [
+  {
+    icon: <Search size={28} />,
+    step: "01",
+    title: "업무 진단",
+    desc: "현재 사용하는 자료, 담당자 역할, 반복 업무와 병목을 함께 확인합니다.",
+  },
+  {
+    icon: <Layers size={28} />,
+    step: "02",
+    title: "구조 설계",
+    desc: "고객·작업·재고·정산·보고 중 필요한 흐름을 우선순위에 맞게 설계합니다.",
+  },
+  {
+    icon: <Hammer size={28} />,
+    step: "03",
+    title: "구축·테스트",
+    desc: "실제 담당자가 사용할 수 있도록 화면과 입력 흐름을 구현하고 점검합니다.",
+  },
+  {
+    icon: <RefreshCw size={28} />,
+    step: "04",
+    title: "운영 개선",
+    desc: "사용 과정에서 발생하는 불편을 확인하고, 다음 개선 범위를 함께 정리합니다.",
+  },
+];
+
+const CONTACT_MAILTO =
+  "mailto:contact@ozklab.com?subject=" +
+  encodeURIComponent("[OZ.K Lab] 업무 시스템 구축 상담 문의");
 
 export default function Home() {
   return (
@@ -210,55 +280,50 @@ export default function Home() {
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
                 style={{ backgroundColor: `${PRIMARY}18`, color: PRIMARY }}
               >
-                <Zap size={13} />
-                AI × 자동화 × 디지털 솔루션
+                <Layers size={13} />
+                CRM · A/S·QC · 업무 자동화
               </div>
               <h1
                 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5"
-                style={{ lineHeight: "1.2" }}
+                style={{ lineHeight: "1.2", wordBreak: "keep-all" }}
               >
-                AI와 자동화로
+                고객관리부터 작업·정산까지,
                 <br />
-                <span style={{ color: PRIMARY }}>현실에 쓰이는</span>
-                <br />
-                서비스를 만듭니다.
+                <span style={{ color: PRIMARY }}>현장에 맞는 업무 시스템</span>
+                을 구축합니다.
               </h1>
-              {/* ① Hero 설명 문구 — "업무 자동화까지," → "업무 자동화," + keep-all */}
               <p
                 className="text-base sm:text-lg text-gray-500 mb-8 max-w-md"
                 style={{ lineHeight: "1.85", wordBreak: "keep-all" }}
               >
-                OZ.K Lab은 아이의 진로 탐색부터 작은 조직의 업무 자동화,
-                생활과 현장에서 바로 쓰이는{" "}
-                <span className="whitespace-nowrap">디지털 솔루션을 설계합니다.</span>
+                엑셀, 메신저, 종이와 담당자 기억에 흩어진 업무를 누구나 이어서{" "}
+                <span className="whitespace-nowrap">처리할 수 있는 운영 시스템으로 바꿉니다.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
                 <a
-                  href="https://꿈따라.kr"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  href="#contact"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
                   style={{ backgroundColor: PRIMARY }}
                 >
-                  꿈따라 보러가기
+                  우리 회사 업무 진단 받기
                   <ArrowRight size={15} />
                 </a>
                 <a
-                  href="#contact"
+                  href="#cases"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
                 >
-                  자동화 솔루션 문의하기
+                  구축 사례 보기
                   <ChevronRight size={15} />
                 </a>
               </div>
             </motion.div>
 
-            {/* Right: service summary cards */}
+            {/* Right: problem-solving cards */}
             <motion.div
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, delay: 0.15, ease: "easeOut" }}
-              className="grid grid-cols-1 sm:grid-cols-2 gap-3"
+              className="flex flex-col gap-3"
             >
               {heroCards.map((card, i) => (
                 <div
@@ -271,24 +336,18 @@ export default function Home() {
                   >
                     {card.icon}
                   </div>
-                  <p className="text-sm font-semibold text-gray-900 mb-1">{card.title}</p>
+                  <p
+                    className="text-sm font-semibold text-gray-900 mb-1"
+                    style={{ wordBreak: "keep-all" }}
+                  >
+                    {card.title}
+                  </p>
                   <p
                     className="text-xs text-gray-500"
                     style={{ lineHeight: "1.65", wordBreak: "keep-all" }}
                   >
                     {card.desc}
                   </p>
-                  {card.link && (
-                    <a
-                      href={card.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-3 text-xs font-medium"
-                      style={{ color: PRIMARY }}
-                    >
-                      바로가기 <ArrowRight size={12} />
-                    </a>
-                  )}
                 </div>
               ))}
             </motion.div>
@@ -296,48 +355,57 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── About ─── */}
-      <section id="about" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      {/* ─── 고객 문제 ─── */}
+      <section id="problems" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            {/* ② About 섹션 — 명시적 줄바꿈 + keep-all + whitespace-nowrap */}
-            <div className="max-w-2xl mx-auto text-center">
-              <p
-                className="text-xs font-semibold tracking-widest uppercase mb-3"
-                style={{ color: PRIMARY }}
-              >
-                About OZ.K Lab
-              </p>
+            <div className="text-center mb-10">
               <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5"
-                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3"
+                style={{ wordBreak: "keep-all" }}
               >
-                현장의 어려움을 이해하고,
-                <br />
-                경험과 기술로 더 나은 환경을 만듭니다.
+                현장에서는 이런 문제로 업무가 멈춥니다.
               </h2>
-              <div
-                className="text-base text-gray-600 max-w-xl mx-auto space-y-4"
-                style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+              <p
+                className="text-gray-500 max-w-lg mx-auto text-sm"
+                style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
               >
-                <p>
-                  OZ.K Lab은 현장의 어려움을 이해하고, 경험과 기술을 바탕으로
-                  더 나은 업무 환경을 만드는{" "}
-                  <span className="whitespace-nowrap">디지털 솔루션을 설계합니다.</span>
-                </p>
-                <p>
-                  좋소아빠 자동화, 꿈따라, 명따라를 통해 반복 업무, 진로 탐색,
-                  자기이해를 더 쉽게 정리할 수 있는{" "}
-                  <span className="whitespace-nowrap">서비스를 만듭니다.</span>
-                </p>
-              </div>
+                툴을 하나 더 늘리기보다, 지금의 업무 흐름을 연결하는 구조가 먼저 필요합니다.
+              </p>
             </div>
           </FadeIn>
+
+          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
+            {problemCards.map((item, i) => (
+              <FadeIn key={i} delay={i * 0.08}>
+                <div className="bg-white border border-gray-100 rounded-2xl p-6 h-full flex flex-col hover:shadow-md transition-all duration-300">
+                  <div
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
+                    style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}
+                  >
+                    {item.icon}
+                  </div>
+                  <h3
+                    className="text-base font-bold text-gray-900 mb-2"
+                    style={{ wordBreak: "keep-all" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <p
+                    className="text-sm text-gray-600"
+                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                  >
+                    {item.desc}
+                  </p>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
         </div>
       </section>
 
-      {/* ─── Services ─── */}
-      <section id="services" className="py-16 sm:py-20 bg-white">
+      {/* ─── 솔루션 ─── */}
+      <section id="solutions" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="text-center mb-10">
@@ -345,42 +413,21 @@ export default function Home() {
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
-                Services
+                Solutions
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                OZ.K Lab의 서비스
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900"
+                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+              >
+                업무를 더 잘게 나누기보다,
+                <br />
+                한 번에 이어지도록 설계합니다.
               </h2>
             </div>
           </FadeIn>
 
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                icon: <Briefcase size={24} />,
-                tag: "업무 자동화",
-                title: "좋소아빠 자동화",
-                subtitle: null as string | null,
-                /* ③ 좋소아빠 카드 — 말미 orphan 방지: 문장 재구성 */
-                desc: "작은 회사와 실무자를 위한 업무 자동화 솔루션입니다. 엑셀, 구글시트, 웹앱, AI를 활용해 반복 작업과 보고서 작성을 줄이고, 현장에서 바로 쓸 수 있는 실무형 시스템을 만듭니다.",
-                link: null as string | null,
-              },
-              {
-                icon: <GraduationCap size={24} />,
-                tag: "진로 탐색",
-                title: "꿈따라",
-                subtitle: null,
-                desc: "막연한 꿈이 아닌, 실행 가능한 내일을 설계하는 자녀 진로탐색 서비스입니다. 자녀의 관심사와 성향을 바탕으로 직업 탐색, 진로 대화, 부모 가이드를 제공합니다.",
-                link: "https://꿈따라.kr",
-              },
-              {
-                icon: <BookOpen size={24} />,
-                tag: "자기이해 리포트",
-                title: "명따라",
-                subtitle: "Birth Code Analysis",
-                desc: "생년월일과 전통 상징 체계를 바탕으로 성향, 강점, 반복 패턴, 일의 방향성을 정리하는 자기이해 리포트입니다. 현실적인 선택을 돕기 위한 참고형 인사이트 콘텐츠입니다.",
-                link: null,
-              },
-            ].map((svc, i) => (
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {solutionCards.map((svc, i) => (
               <FadeIn key={i} delay={i * 0.08}>
                 <div className="bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
                   <div
@@ -395,27 +442,13 @@ export default function Home() {
                   >
                     {svc.tag}
                   </span>
-                  <h3 className="text-lg font-bold text-gray-900 mb-1">{svc.title}</h3>
-                  {svc.subtitle && (
-                    <p className="text-xs text-gray-400 mb-2.5">{svc.subtitle}</p>
-                  )}
+                  <h3 className="text-lg font-bold text-gray-900 mb-2">{svc.title}</h3>
                   <p
                     className="text-sm text-gray-600 flex-1"
                     style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
                   >
                     {svc.desc}
                   </p>
-                  {svc.link && (
-                    <a
-                      href={svc.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-4 text-sm font-medium hover:gap-2 transition-all duration-200"
-                      style={{ color: PRIMARY }}
-                    >
-                      서비스 보기 <ArrowRight size={14} />
-                    </a>
-                  )}
                 </div>
               </FadeIn>
             ))}
@@ -423,67 +456,127 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── AI Workflow ─── */}
-      <section id="ai-workflow" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      {/* ─── 구축 사례 ─── */}
+      <section id="cases" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
-            {/* ④ AI Workflow — 설명 max-w 확장 + keep-all */}
             <div className="text-center mb-10">
               <p
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
-                AI Workflow
+                Cases
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3">
-                기획·구현·전략을 연결하는
-                <br />
-                AI 워크플로우
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-3"
+                style={{ wordBreak: "keep-all" }}
+              >
+                현장의 흐름을 이해해 만든 구축 사례
               </h2>
               <p
                 className="text-gray-500 max-w-lg mx-auto text-sm"
                 style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
               >
-                아이디어 기획부터 시스템 구현, 서비스 전략까지
-                AI를 활용해 통합적으로 설계합니다.
-                아이디어가 현실이 되는 흐름을 OZ.K Lab이 함께 설계합니다.
+                업무를 단순히 디지털로 옮기지 않고, 담당자가 실제로 사용하는 흐름에 맞춰 설계합니다.
               </p>
             </div>
           </FadeIn>
 
-          <div className="grid md:grid-cols-3 gap-6 max-w-4xl mx-auto">
-            {[
-              {
-                icon: <Brain size={28} />,
-                step: "01",
-                title: "기획",
-                desc: "현장의 문제를 정의하고, AI와 함께 구조화된 솔루션을 설계합니다.",
-              },
-              {
-                icon: <Code2 size={28} />,
-                step: "02",
-                title: "구현",
-                desc: "웹앱, 자동화 스크립트, AI 도구를 실제 환경에 맞게 구축합니다.",
-              },
-              {
-                icon: <Target size={28} />,
-                step: "03",
-                title: "전략",
-                desc: "서비스의 방향성과 확장 전략을 지속적으로 검토하고 개선합니다.",
-              },
-            ].map((item, i) => (
-              <FadeIn key={i} delay={i * 0.12}>
-                <div className="relative bg-white rounded-2xl p-7 hover:shadow-md hover:-translate-y-1 transition-all duration-300">
-                  <div className="absolute top-5 right-5 text-4xl font-black text-gray-50 select-none">
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {caseStudies.map((item, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 h-full flex flex-col">
+                  <h3
+                    className="text-lg font-bold text-gray-900 mb-4"
+                    style={{ wordBreak: "keep-all" }}
+                  >
+                    {item.title}
+                  </h3>
+                  <div className="space-y-4 flex-1">
+                    <div>
+                      <p
+                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
+                        style={{ color: PRIMARY }}
+                      >
+                        {item.problemLabel}
+                      </p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                      >
+                        {item.problem}
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
+                        style={{ color: PRIMARY }}
+                      >
+                        {item.approachLabel}
+                      </p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                      >
+                        {item.approach}
+                      </p>
+                    </div>
+                    <div>
+                      <p
+                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
+                        style={{ color: PRIMARY }}
+                      >
+                        {item.valueLabel}
+                      </p>
+                      <p
+                        className="text-sm text-gray-600"
+                        style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
+                      >
+                        {item.value}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </FadeIn>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ─── 도입 절차 ─── */}
+      <section id="process" className="py-16 sm:py-20 bg-white">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="text-center mb-10">
+              <p
+                className="text-xs font-semibold tracking-widest uppercase mb-3"
+                style={{ color: PRIMARY }}
+              >
+                Process
+              </p>
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900"
+                style={{ wordBreak: "keep-all" }}
+              >
+                우리 회사 업무에 맞게, 이렇게 시작합니다.
+              </h2>
+            </div>
+          </FadeIn>
+
+          <div className="grid sm:grid-cols-2 md:grid-cols-4 gap-6">
+            {processSteps.map((item, i) => (
+              <FadeIn key={i} delay={i * 0.1}>
+                <div className="relative bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
+                  <div className="absolute top-5 right-5 text-3xl font-black text-gray-50 select-none">
                     {item.step}
                   </div>
                   <div
-                    className="w-12 h-12 rounded-xl flex items-center justify-center mb-5"
+                    className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
                     style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}
                   >
                     {item.icon}
                   </div>
-                  <h3 className="text-lg font-bold text-gray-900 mb-2">{item.title}</h3>
+                  <h3 className="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
                   <p
                     className="text-sm text-gray-600"
                     style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
@@ -497,8 +590,46 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ─── Portfolio ─── */}
-      <section id="portfolio" className="py-16 sm:py-20 bg-white">
+      {/* ─── OZ.K Lab 소개 ─── */}
+      <section id="about" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <FadeIn>
+            <div className="max-w-2xl mx-auto text-center">
+              <p
+                className="text-xs font-semibold tracking-widest uppercase mb-3"
+                style={{ color: PRIMARY }}
+              >
+                About OZ.K Lab
+              </p>
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-5"
+                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+              >
+                현장을 이해하고,
+                <br />
+                바로 쓰이는 시스템을 만듭니다.
+              </h2>
+              <div
+                className="text-base text-gray-600 max-w-xl mx-auto space-y-4"
+                style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
+              >
+                <p>
+                  OZ.K Lab은 작은 조직과 현장 실무자가 실제로 겪는 업무 문제를 이해하고,
+                  고객관리, 업무흐름, 보고와 운영 데이터를 더 쉽게{" "}
+                  <span className="whitespace-nowrap">연결하는 디지털 시스템을 설계합니다.</span>
+                </p>
+                <p>
+                  복잡한 기능을 늘리기보다, 지금의 업무가 더 빠르고 정확하게{" "}
+                  <span className="whitespace-nowrap">이어지는 구조를 만드는 데 집중합니다.</span>
+                </p>
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+      </section>
+
+      {/* ─── 운영 서비스 ─── */}
+      <section id="services" className="py-16 sm:py-20 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="text-center mb-10">
@@ -506,136 +637,49 @@ export default function Home() {
                 className="text-xs font-semibold tracking-widest uppercase mb-3"
                 style={{ color: PRIMARY }}
               >
-                Portfolio
+                Services
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">주요 작업물</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
+                OZ.K Lab이 운영하는 서비스
+              </h2>
             </div>
           </FadeIn>
 
-          <div className="grid sm:grid-cols-2 gap-5 max-w-4xl mx-auto">
-            {[
-              {
-                category: "좋소아빠 자동화",
-                title: "사무직 업무관리 & 보고서 자동화 시스템",
-                desc: "반복적인 보고서 작성과 업무 집계를 자동화하여 실무 효율을 높인 맞춤형 시스템입니다.",
-                link: null as string | null,
-              },
-              {
-                category: "좋소아빠 자동화",
-                title: "QC/AS 업무 자동화",
-                desc: "품질관리 및 A/S 업무 흐름을 구조화하고 자동 추적·집계 시스템으로 전환한 프로젝트입니다.",
-                link: null,
-              },
-              {
-                category: "좋소아빠 자동화",
-                title: "구글시트/엑셀 자동 보고 시스템",
-                desc: "현장 데이터를 실시간으로 집계하고 보고서를 자동 생성하는 스프레드시트 자동화 솔루션입니다.",
-                link: null,
-              },
-              {
-                category: "꿈따라",
-                title: "꿈따라 베타 서비스",
-                desc: "자녀의 진로 탐색을 돕는 AI 기반 대화형 서비스로, 직업 탐색부터 부모 가이드까지 제공합니다.",
-                link: "https://꿈따라.kr",
-              },
-            ].map((item, i) => (
-              <FadeIn key={i} delay={i * 0.08}>
-                <div className="border border-gray-100 rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full flex flex-col">
-                  <span
-                    className="text-xs font-semibold tracking-widest uppercase mb-2.5"
+          <FadeIn delay={0.1}>
+            <div className="max-w-xl mx-auto">
+              <div className="border border-gray-100 rounded-2xl p-6 sm:p-7 flex items-center gap-5">
+                <div
+                  className="w-12 h-12 rounded-xl flex items-center justify-center flex-shrink-0"
+                  style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}
+                >
+                  <GraduationCap size={24} />
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-base font-bold text-gray-900 mb-1">꿈따라</h3>
+                  <p
+                    className="text-sm text-gray-600 mb-3"
+                    style={{ lineHeight: "1.7", wordBreak: "keep-all" }}
+                  >
+                    자녀와 부모가 함께 직업을 탐색하고, 진로 대화를 시작할 수 있도록 돕는 진로탐색 서비스입니다.
+                  </p>
+                  <a
+                    href="https://꿈따라.kr"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1 text-sm font-medium hover:gap-2 transition-all duration-200"
                     style={{ color: PRIMARY }}
                   >
-                    {item.category}
-                  </span>
-                  <h3 className="text-base font-bold text-gray-900 mb-2">{item.title}</h3>
-                  <p
-                    className="text-sm text-gray-600 flex-1"
-                    style={{ lineHeight: "1.8", wordBreak: "keep-all" }}
-                  >
-                    {item.desc}
-                  </p>
-                  {item.link && (
-                    <a
-                      href={item.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 mt-4 text-sm font-medium hover:gap-2 transition-all duration-200"
-                      style={{ color: PRIMARY }}
-                    >
-                      서비스 보기 <ArrowRight size={14} />
-                    </a>
-                  )}
+                    꿈따라 보러가기 <ArrowRight size={14} />
+                  </a>
                 </div>
-              </FadeIn>
-            ))}
-          </div>
+              </div>
+            </div>
+          </FadeIn>
         </div>
       </section>
 
-      {/* ─── 명따라 ─── */}
-      <section id="myeongtara" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-2xl mx-auto">
-            <FadeIn>
-              <div className="text-center mb-8">
-                <p
-                  className="text-xs font-semibold tracking-widest uppercase mb-3"
-                  style={{ color: PRIMARY }}
-                >
-                  명따라
-                </p>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">명따라</h2>
-                <p className="text-base text-gray-400">생년월일 기반 자기이해 리포트</p>
-              </div>
-            </FadeIn>
-
-            <FadeIn delay={0.1}>
-              <div className="bg-white rounded-2xl p-7 sm:p-9 border border-gray-100">
-                <p
-                  className="text-gray-700 text-sm sm:text-base mb-4"
-                  style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
-                >
-                  명따라는 생년월일과 전통 상징 체계를 바탕으로
-                  성향, 강점, 반복 패턴, 일의 방향성을 정리하는{" "}
-                  <span className="whitespace-nowrap">자기이해 리포트입니다.</span>
-                </p>
-                <p
-                  className="text-gray-700 text-sm sm:text-base mb-7"
-                  style={{ lineHeight: "1.95", wordBreak: "keep-all" }}
-                >
-                  예언이나 확정적 판단이 아니라, 나를 더 잘 이해하고
-                  현실적인 선택을 돕기 위한{" "}
-                  <span className="whitespace-nowrap">참고형 인사이트 콘텐츠입니다.</span>
-                </p>
-
-                {/* ⑤ 명따라 소카드 — ReactNode로 줄바꿈 정밀 제어 */}
-                <div className="grid sm:grid-cols-3 gap-3">
-                  {myeongCards.map((item, i) => (
-                    <div key={i} className="bg-gray-50 rounded-xl p-4">
-                      <div
-                        className="w-2 h-2 rounded-full mb-2.5"
-                        style={{ backgroundColor: PRIMARY }}
-                      />
-                      <p className="font-semibold text-gray-900 text-sm mb-1">{item.label}</p>
-                      <p
-                        className="text-xs text-gray-500"
-                        style={{ lineHeight: "1.65", wordBreak: "keep-all" }}
-                      >
-                        {item.desc}
-                      </p>
-                    </div>
-                  ))}
-                </div>
-
-                <p className="text-xs text-gray-400 mt-5">Birth Code Analysis · 준비 중</p>
-              </div>
-            </FadeIn>
-          </div>
-        </div>
-      </section>
-
-      {/* ─── Contact ─── */}
-      <section id="contact" className="py-16 sm:py-20 bg-white">
+      {/* ─── 상담 신청 ─── */}
+      <section id="contact" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="max-w-xl mx-auto text-center">
@@ -645,55 +689,48 @@ export default function Home() {
               >
                 Contact
               </p>
-              <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-                OZ.K Lab에 문의하세요
+              <h2
+                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4"
+                style={{ lineHeight: "1.35", wordBreak: "keep-all" }}
+              >
+                우리 회사의 업무 흐름,
+                <br />
+                어디부터 정리하면 될지 함께 살펴보겠습니다.
               </h2>
               <p
                 className="text-gray-500 mb-8 text-sm sm:text-base"
                 style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
               >
-                업무 자동화 도입, 꿈따라 제휴, 명따라 리포트 관련 문의는
-                아래 이메일로 연락해 주세요.
+                고객관리, A/S·QC, 업무일지, 보고 자동화처럼 반복되는 업무가 있다면{" "}
+                <span className="whitespace-nowrap">현재 사용 중인 방식부터 알려주세요.</span>
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-col items-center gap-3">
                 <a
-                  href="mailto:contact@ozklab.com"
+                  href={CONTACT_MAILTO}
                   className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
                   style={{ backgroundColor: PRIMARY }}
                 >
                   <Mail size={15} />
-                  문의하기
+                  상담 문의하기
                 </a>
                 <a
-                  href="https://꿈따라.kr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
-                >
-                  꿈따라 바로가기
-                  <ArrowRight size={15} />
-                </a>
-              </div>
-              <p className="mt-5 text-sm text-gray-400">
-                <a
-                  href="mailto:contact@ozklab.com"
-                  className="hover:underline transition-colors"
+                  href={CONTACT_MAILTO}
+                  className="text-sm text-gray-400 hover:underline transition-colors"
                   style={{ color: PRIMARY }}
                 >
                   contact@ozklab.com
                 </a>
-              </p>
+              </div>
             </div>
           </FadeIn>
         </div>
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="py-12 border-t border-gray-100">
+      <footer className="py-12 border-t border-gray-100 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between gap-8">
-            {/* Footer 왼쪽 — 텍스트 로고 (투명 PNG 준비 후 이미지로 교체 예정) */}
-            <div className="max-w-[260px]">
+            <div className="max-w-[280px]">
               <div className="font-bold text-lg text-gray-900 mb-2.5">
                 OZ.K <span style={{ color: PRIMARY }}>Lab</span>
               </div>
@@ -701,8 +738,8 @@ export default function Home() {
                 className="text-sm text-gray-500"
                 style={{ lineHeight: "1.75", wordBreak: "keep-all" }}
               >
-                AI와 자동화로 현실에 쓰이는 서비스를 만드는{" "}
-                <span className="whitespace-nowrap">실행형 연구소입니다.</span>
+                OZ.K Lab은 현장에 맞는 CRM, A/S·QC,{" "}
+                <span className="whitespace-nowrap">업무자동화 시스템을 설계·구축합니다.</span>
               </p>
             </div>
 
@@ -711,10 +748,6 @@ export default function Home() {
                 서비스
               </p>
               <div className="space-y-3">
-                <div>
-                  <p className="font-medium text-gray-700">좋소아빠 자동화</p>
-                  <p className="text-xs text-gray-400 mt-0.5">실무 자동화 솔루션</p>
-                </div>
                 <div>
                   <a
                     href="https://꿈따라.kr"
@@ -726,26 +759,20 @@ export default function Home() {
                   </a>
                   <p className="text-xs text-gray-400 mt-0.5">자녀 진로탐색 서비스</p>
                 </div>
-                <div>
-                  <span className="font-medium text-gray-700">명따라</span>
-                  <p className="text-xs text-gray-400 mt-0.5">자기이해 리포트</p>
-                </div>
               </div>
             </div>
           </div>
 
-          {/* ⑥ Footer 하단 — 브랜드 설명 줄바꿈 보정 */}
           <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
             <p className="text-xs text-gray-400 whitespace-nowrap">
-              © OZ.K Lab. All rights reserved.
+              © 오즈케이랩(OZ.K Lab). All rights reserved.
             </p>
-            <p
-              className="text-xs text-gray-400 sm:text-right"
-              style={{ wordBreak: "keep-all" }}
+            <a
+              href="mailto:contact@ozklab.com"
+              className="text-xs text-gray-400 hover:underline transition-colors"
             >
-              OZ.K Lab은 좋소아빠 자동화, 꿈따라, 명따라를 운영하는{" "}
-              <span className="whitespace-nowrap">실행형 디지털 솔루션 브랜드입니다.</span>
-            </p>
+              contact@ozklab.com
+            </a>
           </div>
         </div>
       </footer>

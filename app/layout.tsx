@@ -2,14 +2,25 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "OZ.K Lab — AI와 자동화로 현실에 쓰이는 서비스",
+  title: "OZ.K Lab | CRM·A/S·QC·업무자동화 시스템 구축",
   description:
-    "OZ.K Lab은 아이의 진로 탐색부터 작은 조직의 업무 자동화까지, 생활과 현장에서 바로 쓰이는 디지털 솔루션을 설계합니다.",
-  keywords: ["OZ.K Lab", "업무자동화", "꿈따라", "명따라", "좋소아빠", "진로탐색", "AI솔루션"],
+    "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고·정산 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
+  keywords: [
+    "OZ.K Lab",
+    "오즈케이랩",
+    "CRM 구축",
+    "고객관리 시스템",
+    "A/S 관리",
+    "QC 관리",
+    "업무자동화",
+    "업무일지 자동화",
+    "맞춤형 웹앱",
+    "운영관리 시스템",
+  ],
   openGraph: {
-    title: "OZ.K Lab — AI와 자동화로 현실에 쓰이는 서비스",
+    title: "OZ.K Lab | CRM·A/S·QC·업무자동화 시스템 구축",
     description:
-      "OZ.K Lab은 아이의 진로 탐색부터 작은 조직의 업무 자동화까지, 생활과 현장에서 바로 쓰이는 디지털 솔루션을 설계합니다.",
+      "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고·정산 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
     url: "https://ozklab.kr",
     siteName: "OZ.K Lab",
     locale: "ko_KR",
