@@ -17,6 +17,7 @@ import {
   ArrowRight,
   ChevronRight,
   Mail,
+  MessageCircle,
   GraduationCap,
   Menu,
   X,
@@ -271,6 +272,8 @@ const processSteps = [
 const CONTACT_MAILTO =
   "mailto:contact@ozklab.com?subject=" +
   encodeURIComponent("[OZ.K Lab] 업무 시스템 구축 상담 문의");
+
+const KAKAO_CHANNEL_URL = "https://pf.kakao.com/_AxdxexhX";
 
 export default function Home() {
   return (
@@ -705,14 +708,26 @@ export default function Home() {
                 <span className="whitespace-nowrap">현재 사용 중인 방식부터 알려주세요.</span>
               </p>
               <div className="flex flex-col items-center gap-4">
-                <a
-                  href={CONTACT_MAILTO}
-                  className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
-                  style={{ backgroundColor: PRIMARY }}
-                >
-                  <Mail size={15} />
-                  상담 문의하기
-                </a>
+                <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+                  <a
+                    href={KAKAO_CHANNEL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="카카오톡 채널에서 OZ.K Lab 상담 시작하기 (새 창 열림)"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: PRIMARY }}
+                  >
+                    <MessageCircle size={15} />
+                    카카오톡 상담 시작
+                  </a>
+                  <a
+                    href={CONTACT_MAILTO}
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
+                  >
+                    <Mail size={15} />
+                    상담 문의하기
+                  </a>
+                </div>
                 <a
                   href={CONTACT_MAILTO}
                   className="text-sm text-gray-400 hover:underline transition-colors"
