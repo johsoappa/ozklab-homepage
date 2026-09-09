@@ -27,6 +27,11 @@ export const metadata: Metadata = {
     type: "website",
   },
   metadataBase: new URL("https://ozklab.kr"),
+  verification: {
+    other: {
+      "naver-site-verification": "f088e4f23aea5e759f47529c96544b96b4573b24",
+    },
+  },
 };
 
 export default function RootLayout({
