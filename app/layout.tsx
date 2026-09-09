@@ -28,6 +28,7 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://ozklab.kr"),
   verification: {
+    google: "6g7Khas70m8f96ZFXTxqOPpHrqkL-zQGdtte20h609g",
     other: {
       "naver-site-verification": "f088e4f23aea5e759f47529c96544b96b4573b24",
     },
