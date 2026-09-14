@@ -24,9 +24,11 @@ export type QuestionDef = {
   no: number;
   title: string;
   multi: boolean;
-  /** 최소 선택 개수. 단일 선택은 1, 복수 선택은 문항 성격에 따라 0 또는 1 */
+  /** 최소 선택 개수. 단일 선택은 1, 복수 선택도 배타 옵션이 있어 항상 1 */
   minSelect: number;
   options: QuestionOption[];
+  /** 복수 선택 문항에서 다른 선택지와 함께 고를 수 없는 "해당 없음"류 옵션의 값 */
+  exclusiveValue?: string;
 };
 
 export type Answers = Partial<Record<QuestionId, string[]>>;
@@ -63,8 +65,10 @@ export const QUESTIONS: QuestionDef[] = [
     no: 3,
     title: "현재 업무 관리 방식",
     multi: true,
-    minSelect: 0,
+    minSelect: 1,
+    exclusiveValue: "noTool",
     options: [
+      { value: "noTool", label: "별도 관리 도구 없이 전화·카카오톡·기억에 의존합니다" },
       { value: "excel", label: "엑셀" },
       { value: "sheets", label: "구글시트" },
       { value: "kakao", label: "카카오톡" },
@@ -104,8 +108,10 @@ export const QUESTIONS: QuestionDef[] = [
     no: 6,
     title: "자주 발생하는 누락 또는 재작업",
     multi: true,
-    minSelect: 0,
+    minSelect: 1,
+    exclusiveValue: "none",
     options: [
+      { value: "none", label: "특별히 없음" },
       { value: "assignee", label: "담당자 배정 누락" },
       { value: "customerNotice", label: "고객 안내 누락" },
       { value: "payment", label: "비용·입금 확인 누락" },
@@ -146,6 +152,7 @@ export const QUESTIONS: QuestionDef[] = [
     title: "도입 첫 단계부터 필요한 고도화 요구",
     multi: true,
     minSelect: 1,
+    exclusiveValue: "none",
     options: [
       { value: "none", label: "특별히 없음" },
       { value: "fileManagement", label: "사진·PDF 파일 관리" },
@@ -196,6 +203,13 @@ function missedScore(count: number): number {
   return 20;
 }
 
+/** Q6 선택 개수. "특별히 없음"(배타 옵션)만 선택된 경우는 0개로 취급한다. */
+function getMissedCount(answers: Answers): number {
+  const items = answers.missedItems ?? [];
+  if (items.length === 1 && items[0] === "none") return 0;
+  return items.length;
+}
+
 export type ScoreBreakdown = {
   volume: number;
   hours: number;
@@ -209,7 +223,7 @@ export function calculateScore(answers: Answers): ScoreBreakdown {
   const volume = VOLUME_SCORE[answers.monthlyVolume?.[0] ?? ""] ?? 0;
   const hours = HOURS_SCORE[answers.weeklyHours?.[0] ?? ""] ?? 0;
   const channel = CHANNEL_SCORE[answers.channelCount?.[0] ?? ""] ?? 0;
-  const missed = missedScore(answers.missedItems?.length ?? 0);
+  const missed = missedScore(getMissedCount(answers));
   const sn = SN_SCORE[answers.snNeed?.[0] ?? ""] ?? 0;
   return { volume, hours, channel, missed, sn, total: volume + hours + channel + missed + sn };
 }
@@ -246,9 +260,10 @@ export function getRecommendation(answers: Answers, total: number): Recommendati
   const advanced = answers.advancedNeeds ?? [];
   const advancedExtra = advanced.filter((v) => v !== "none");
   const stdOrder = STANDARDIZATION_ORDER[standardization] ?? 0;
+  const hasNoTool = tools.length === 1 && tools[0] === "noTool";
 
   // C. 업무 표준화 우선 — 가장 먼저 확인 (기초가 부족하면 과도한 자동화 권유 금지)
-  if (total <= 39 || standardization === "varies" || tools.length === 0) {
+  if (total <= 39 || standardization === "varies" || hasNoTool) {
     return {
       type: "standardize",
       headline: "업무 표준화가 먼저 필요합니다.",
@@ -387,6 +402,7 @@ export function getConsultationChecklist(type: RecommendationType): string[] {
 // ─── 상담자용 요약 — 무료 15분 상담 확인 질문 (동적 3개) ───
 
 const TOOL_LABELS: Record<string, string> = {
+  noTool: "별도 관리 도구 없음(전화·카카오톡·기억 의존)",
   excel: "엑셀",
   sheets: "구글시트",
   kakao: "카카오톡",
@@ -419,9 +435,15 @@ export function getSelectedMissedLabels(answers: Answers): string[] {
 export function getConsultantQuestions(answers: Answers): string[] {
   const questions: string[] = [];
 
-  const toolLabels = getToolLabels(answers);
-  const toolText = toolLabels.length > 0 ? toolLabels.join("·") : "현재 사용 중인 관리 도구";
-  questions.push(`현재 사용 중인 ${toolText}의 항목·열 구조는 어떻게 되어 있나요?`);
+  const tools = answers.tools ?? [];
+  const usesNoTool = tools.length === 1 && tools[0] === "noTool";
+  if (usesNoTool) {
+    questions.push("현재는 별도 관리 도구 없이 전화·카카오톡·기억에 의존하고 계신데, 가장 먼저 기록으로 남기고 싶은 업무는 무엇인가요?");
+  } else {
+    const toolLabels = getToolLabels(answers);
+    const toolText = toolLabels.length > 0 ? toolLabels.join("·") : "현재 사용 중인 관리 도구";
+    questions.push(`현재 사용 중인 ${toolText}의 항목·열 구조는 어떻게 되어 있나요?`);
+  }
 
   const sn = answers.snNeed?.[0];
   if (sn === "often" || sn === "required") {

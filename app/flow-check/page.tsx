@@ -27,7 +27,7 @@ import {
   getSelectedMissedLabels,
   getToolLabels,
   type Answers,
-  type QuestionId,
+  type QuestionDef,
   type ScoreTier,
 } from "./logic";
 
@@ -130,21 +130,23 @@ export default function FlowCheckPage() {
     window.setTimeout(() => setToast(null), 2600);
   }
 
-  function toggleOption(id: QuestionId, value: string, multi: boolean) {
+  function toggleOption(q: QuestionDef, value: string) {
     setError(null);
     setAnswers((prev) => {
+      const id = q.id;
       const current = prev[id] ?? [];
-      if (!multi) {
+      if (!q.multi) {
         return { ...prev, [id]: [value] };
       }
-      if (id === "advancedNeeds") {
-        if (value === "none") {
-          return { ...prev, [id]: current.includes("none") ? [] : ["none"] };
+      const exclusiveValue = q.exclusiveValue;
+      if (exclusiveValue) {
+        if (value === exclusiveValue) {
+          return { ...prev, [id]: current.includes(exclusiveValue) ? [] : [exclusiveValue] };
         }
-        const withoutNone = current.filter((v) => v !== "none");
-        const next = withoutNone.includes(value)
-          ? withoutNone.filter((v) => v !== value)
-          : [...withoutNone, value];
+        const withoutExclusive = current.filter((v) => v !== exclusiveValue);
+        const next = withoutExclusive.includes(value)
+          ? withoutExclusive.filter((v) => v !== value)
+          : [...withoutExclusive, value];
         return { ...prev, [id]: next };
       }
       const next = current.includes(value) ? current.filter((v) => v !== value) : [...current, value];
@@ -289,7 +291,9 @@ export default function FlowCheckPage() {
                 Q{question.no}. {question.title}
               </h2>
               {question.multi && (
-                <p className="text-xs text-gray-400 mb-5">복수 선택 가능 (해당 없으면 선택하지 않아도 됩니다)</p>
+                <p className="text-xs text-gray-400 mb-5">
+                  복수 선택 가능 (해당 사항이 없으면 목록의 &lsquo;없음&rsquo;류 항목을 선택하세요)
+                </p>
               )}
               {!question.multi && <div className="mb-5" />}
 
@@ -301,7 +305,7 @@ export default function FlowCheckPage() {
                       key={opt.value}
                       label={opt.label}
                       selected={selected}
-                      onClick={() => toggleOption(question.id, opt.value, question.multi)}
+                      onClick={() => toggleOption(question, opt.value)}
                     />
                   );
                 })}

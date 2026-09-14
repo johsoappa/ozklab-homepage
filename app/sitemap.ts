@@ -5,5 +5,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     {
       url: "https://ozklab.kr/",
     },
+    {
+      url: "https://ozklab.kr/flow-check",
+    },
   ];
 }
