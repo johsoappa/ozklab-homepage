@@ -228,13 +228,18 @@ export function calculateScore(answers: Answers): ScoreBreakdown {
   return { volume, hours, channel, missed, sn, total: volume + hours + channel + missed + sn };
 }
 
-export type ScoreTier = "high" | "mid" | "low" | "base";
+/**
+ * 점수(0~100)는 자동화 도입 승인 점수가 아니라 월 업무량·주간 수기 정리 시간·
+ * 전달경로·누락재작업·SN필요도로 계산한 "업무 운영 부담도" 지표다.
+ * 도입 단계 판정은 별도로 getRecommendation이 담당하며, 점수 등급 문구는
+ * 자동화 도입을 확정하는 것처럼 보이지 않도록 중립적으로만 표현한다.
+ */
+export type ScoreTier = "high" | "mid" | "low";
 
 export function getScoreLabel(total: number): { grade: string; tier: ScoreTier } {
-  if (total >= 80) return { grade: "자동화 우선 검토", tier: "high" };
-  if (total >= 60) return { grade: "자동화 도입 권장", tier: "mid" };
-  if (total >= 40) return { grade: "선택적 개선 검토", tier: "low" };
-  return { grade: "업무 표준화·기록 정리 우선", tier: "base" };
+  if (total >= 60) return { grade: "높음", tier: "high" };
+  if (total >= 40) return { grade: "보통", tier: "mid" };
+  return { grade: "낮음", tier: "low" };
 }
 
 // ─── 추천 도입 방향 ───
@@ -264,10 +269,16 @@ export function getRecommendation(answers: Answers, total: number): Recommendati
 
   // C. 업무 표준화 우선 — 가장 먼저 확인 (기초가 부족하면 과도한 자동화 권유 금지)
   if (total <= 39 || standardization === "varies" || hasNoTool) {
+    // 점수 자체는 낮지 않은데(즉 반복·누락으로 인한 부담은 있는데) 기록 체계가
+    // 없거나(hasNoTool) 표준화가 되어 있지 않아(varies) 걸린 경우와, 애초에
+    // 점수 자체가 낮아 기본 정리 단계인 경우를 구분해 설명한다.
+    const isBurdenedButUnprepared = total > 39;
     return {
       type: "standardize",
-      headline: "업무 표준화가 먼저 필요합니다.",
-      body: "지금은 프로그램 도입보다 업무 상태와 기록 기준을 먼저 정리하는 단계입니다. OZ.K Lab은 우선순위와 기본 관리 구조부터 제안드릴 수 있습니다.",
+      headline: "업무 표준화·기록 정리가 먼저 필요합니다",
+      body: isBurdenedButUnprepared
+        ? "반복·누락으로 인한 업무 부담은 높습니다. 다만 현재는 기록 기준과 진행 상태를 먼저 정리해야 시스템 도입 효과가 커집니다."
+        : "지금은 큰 시스템 도입보다 업무 기록 방식과 상태 기준을 가볍게 정리하는 것이 더 적합합니다.",
     };
   }
 
@@ -277,8 +288,8 @@ export function getRecommendation(answers: Answers, total: number): Recommendati
   if (total >= 60 && stdOrder >= 2 && hasBasicTool && onlyNoAdvanced) {
     return {
       type: "starter",
-      headline: "Service Flow Starter 도입을 검토해 보세요.",
-      body: "현재 업무 흐름을 크게 바꾸지 않고 접수·작업 현황·이력·고객 안내·주간 마감을 먼저 정리할 수 있습니다.",
+      headline: "Service Flow Starter 도입 검토가 적합합니다",
+      body: "기본 기록 체계가 있어 접수·진행상태·고객 안내·주간 마감을 표준 흐름으로 정리할 수 있습니다.",
     };
   }
 
@@ -286,16 +297,16 @@ export function getRecommendation(answers: Answers, total: number): Recommendati
   if (total >= 60 && advancedExtra.length > 0) {
     return {
       type: "custom",
-      headline: "맞춤 구축 설계 진단을 권장합니다.",
-      body: "업무 자동화 필요도는 높지만, 표준 Starter보다 맞춤 설계가 필요한 구조입니다. 무료 결과 확인 후 유료 설계 진단을 권장합니다.",
+      headline: "맞춤 구축 설계 진단이 적합합니다",
+      body: "업무 부담은 높고 고급 요구사항이 있어, 기존 흐름을 확인한 뒤 도입 범위를 설계하는 것이 적합합니다.",
     };
   }
 
   // D. 유료 설계 진단 권장 (A/B/C에 명확히 속하지 않는 경우)
   return {
     type: "diagnostic",
-    headline: "설계 진단으로 다음 단계를 확인하세요.",
-    body: "자동화 가능성은 있으나, 현재 업무 구조와 데이터 준비 상태를 1회 더 확인하는 것이 좋습니다. 무료 15분 결과 확인 후 설계 진단 여부를 결정하세요.",
+    headline: "도입 전 업무 흐름 설계 진단이 필요합니다",
+    body: "자동화 범위를 정하기 전에 현재 업무 흐름과 우선순위를 먼저 확인하는 것이 적합합니다.",
   };
 }
 
@@ -473,8 +484,8 @@ export function buildSummaryText(
 
   return [
     "OZ.K Flow Check 진단 결과",
-    `자동화 우선도: ${breakdown.total}점 (${label.grade})`,
-    `추천 도입 방향: ${recommendation.headline}`,
+    `업무 운영 부담도: ${breakdown.total}점 · ${label.grade}`,
+    `현재 추천 단계: ${recommendation.headline}`,
     `현재 가장 큰 병목: ${bottlenecks}`,
     `예상 절감 시간: ${timeSaving}`,
     `추천 1차 적용 범위: ${scope}`,

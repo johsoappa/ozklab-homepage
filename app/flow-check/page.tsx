@@ -47,9 +47,8 @@ const BODY_STYLE: React.CSSProperties = {
 
 const TIER_COLORS: Record<ScoreTier, { bg: string; text: string }> = {
   high: { bg: `${PRIMARY}15`, text: PRIMARY },
-  mid: { bg: "#EAF6EC", text: "#2F9E44" },
-  low: { bg: "#FDF3E2", text: "#B7862C" },
-  base: { bg: "#F1F2F4", text: "#6B7280" },
+  mid: { bg: "#FDF3E2", text: "#B7862C" },
+  low: { bg: "#F1F2F4", text: "#6B7280" },
 };
 
 type Step = "intro" | "quiz" | "result";
@@ -347,34 +346,42 @@ export default function FlowCheckPage() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, ease: "easeOut" }}
           >
-            {/* 점수 카드 */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 text-center mb-5">
-              <p className="text-xs font-semibold tracking-widest uppercase mb-3" style={{ color: PRIMARY }}>
-                자동화 우선도
-              </p>
+            {/* 추천 단계 — 결과 화면에서 가장 먼저·명확하게 보여줄 정보 */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-8 mb-5">
               <div
-                className="text-5xl sm:text-6xl font-black text-gray-900 mb-3"
-                aria-label={`자동화 우선도 ${diagnosis.breakdown.total}점, 100점 만점 중 ${diagnosis.label.grade} 등급`}
+                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4"
+                style={{ backgroundColor: `${PRIMARY}18`, color: PRIMARY }}
               >
-                {diagnosis.breakdown.total}
-                <span className="text-xl font-bold text-gray-300">/100</span>
+                현재 추천 단계
+              </div>
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2" style={TITLE_STYLE}>
+                {diagnosis.recommendation.headline}
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600" style={BODY_STYLE}>
+                {diagnosis.recommendation.body}
+              </p>
+            </div>
+
+            {/* 업무 운영 부담도 — 추천 단계를 뒷받침하는 참고 지표 */}
+            <div className="bg-white border border-gray-100 rounded-2xl p-5 sm:p-6 mb-5 flex flex-wrap items-center justify-between gap-3">
+              <div>
+                <p className="text-xs font-semibold tracking-widest uppercase mb-1.5 text-gray-400">
+                  업무 운영 부담도
+                </p>
+                <div
+                  className="text-3xl sm:text-4xl font-black text-gray-900"
+                  aria-label={`업무 운영 부담도 ${diagnosis.breakdown.total}점, 100점 만점 중 ${diagnosis.label.grade}`}
+                >
+                  {diagnosis.breakdown.total}
+                  <span className="text-base font-bold text-gray-300">/100</span>
+                </div>
               </div>
               <span
-                className="inline-block px-4 py-1.5 rounded-full text-sm font-bold"
+                className="inline-block px-4 py-1.5 rounded-full text-sm font-bold whitespace-nowrap"
                 style={{ backgroundColor: TIER_COLORS[diagnosis.label.tier].bg, color: TIER_COLORS[diagnosis.label.tier].text }}
               >
                 {diagnosis.label.grade}
               </span>
-            </div>
-
-            {/* 추천 도입 방향 */}
-            <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 mb-5">
-              <h3 className="text-lg font-bold text-gray-900 mb-2" style={TITLE_STYLE}>
-                {diagnosis.recommendation.headline}
-              </h3>
-              <p className="text-sm text-gray-600" style={BODY_STYLE}>
-                {diagnosis.recommendation.body}
-              </p>
             </div>
 
             <div className="grid sm:grid-cols-2 gap-5 mb-5">
@@ -523,8 +530,8 @@ export default function FlowCheckPage() {
             </div>
 
             <dl className="space-y-4 text-sm">
-              <SummaryRow label="자동화 우선도" value={`${diagnosis.breakdown.total}점 (${diagnosis.label.grade})`} />
-              <SummaryRow label="추천 도입 방향" value={diagnosis.recommendation.headline} />
+              <SummaryRow label="업무 운영 부담도" value={`${diagnosis.breakdown.total}점 · ${diagnosis.label.grade}`} />
+              <SummaryRow label="현재 추천 단계" value={diagnosis.recommendation.headline} />
               <SummaryRow
                 label="고객의 현재 관리 도구"
                 value={getToolLabels(answers).join(", ") || "선택 없음"}
