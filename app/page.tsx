@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import {
   Users,
@@ -314,14 +315,14 @@ export default function Home() {
                 <span className="whitespace-nowrap">처리할 수 있는 운영 시스템으로 바꿉니다.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <a
-                  href="#contact"
+                <Link
+                  href="/flow-check"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
                   style={{ backgroundColor: PRIMARY }}
                 >
                   우리 회사 업무 진단 받기
                   <ArrowRight size={15} />
-                </a>
+                </Link>
                 <a
                   href="#cases"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"

@@ -82,6 +82,49 @@ function ProgressBar({ current }: { current: number }) {
   );
 }
 
+function BrandBar() {
+  return (
+    <header className="sticky top-0 z-40 bg-white border-b border-gray-100">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 h-14 flex items-center justify-between gap-3">
+        <Link href="/" className="flex items-center gap-1.5 min-w-0">
+          <span className="font-bold text-base text-gray-900 whitespace-nowrap">
+            OZ.K <span style={{ color: PRIMARY }}>Lab</span>
+          </span>
+          <span className="hidden sm:flex items-center gap-1.5 min-w-0">
+            <span className="text-gray-300 text-xs">·</span>
+            <span className="text-xs text-gray-400 truncate">업무자동화 자가진단</span>
+          </span>
+        </Link>
+        <Link
+          href="/"
+          className="text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors flex-shrink-0"
+        >
+          홈으로
+        </Link>
+      </div>
+    </header>
+  );
+}
+
+function BrandFooter() {
+  return (
+    <footer className="border-t border-gray-100 py-8">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 text-center">
+        <p className="text-sm font-bold text-gray-700 mb-1">
+          OZ.K <span style={{ color: PRIMARY }}>Lab</span>
+        </p>
+        <p className="text-xs text-gray-400 mb-3">CRM · A/S · QC · 업무 자동화</p>
+        <Link
+          href="/"
+          className="text-xs text-gray-400 hover:text-gray-600 transition-colors underline-offset-2 hover:underline"
+        >
+          홈으로 돌아가기
+        </Link>
+      </div>
+    </footer>
+  );
+}
+
 function OptionButton({
   label,
   selected,
@@ -210,24 +253,8 @@ export default function FlowCheckPage() {
 
   return (
     <main className="font-sans min-h-screen bg-white">
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 py-14 sm:py-20">
-        {/* ─── Header ─── */}
-        <div className="mb-8 text-center">
-          <Link
-            href="/"
-            className="inline-flex items-center gap-1 text-sm font-medium text-gray-400 hover:text-gray-600 transition-colors mb-6"
-          >
-            <ArrowLeft size={14} />
-            OZ.K Lab 홈으로
-          </Link>
-          <div
-            className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-4"
-            style={{ backgroundColor: `${PRIMARY}18`, color: PRIMARY }}
-          >
-            OZ.K Flow Check
-          </div>
-        </div>
-
+      <BrandBar />
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pt-10 sm:pt-14 pb-14 sm:pb-20">
         {step === "intro" && (
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -493,6 +520,8 @@ export default function FlowCheckPage() {
           </motion.div>
         )}
       </div>
+
+      <BrandFooter />
 
       {/* ─── 상담자용 요약 미리보기 ─── */}
       {showConsultant && diagnosis && (
