@@ -4,7 +4,7 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "OZ.K Lab | CRM·A/S·QC·업무자동화 시스템 구축",
   description:
-    "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고·정산 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
+    "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
   keywords: [
     "OZ.K Lab",
     "오즈케이랩",
@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "OZ.K Lab | CRM·A/S·QC·업무자동화 시스템 구축",
     description:
-      "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고·정산 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
+      "OZ.K Lab은 고객관리, A/S·QC, 업무일지, 보고 흐름을 현장에 맞게 연결하는 맞춤형 업무 시스템을 설계·구축합니다.",
     url: "https://ozklab.kr",
     siteName: "OZ.K Lab",
     locale: "ko_KR",

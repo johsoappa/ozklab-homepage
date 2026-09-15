@@ -273,7 +273,7 @@ const problemCards = [
   {
     icon: <ScrollText size={24} />,
     title: "보고와 안내가 수작업입니다",
-    desc: "업무일지, 업체 안내, 정산 자료를 반복해서 정리하고 복사해야 합니다.",
+    desc: "업무일지, 업체 안내, 보고 자료를 반복해서 정리하고 복사해야 합니다.",
   },
   {
     icon: <Settings2 size={24} />,
@@ -343,7 +343,7 @@ const processSteps = [
     icon: <Layers size={28} />,
     step: "02",
     title: "구조 설계",
-    desc: "고객·작업·재고·정산·보고 중 필요한 흐름을 우선순위에 맞게 설계합니다.",
+    desc: "고객·작업·재고·보고 중 필요한 흐름을 우선순위에 맞게 설계합니다.",
   },
   {
     icon: <Hammer size={28} />,
@@ -396,7 +396,7 @@ export default function Home() {
                 className="text-4xl sm:text-5xl font-bold text-gray-900 mb-5"
                 style={TITLE_STYLE}
               >
-                고객관리부터 작업·정산까지,
+                고객관리부터 작업·보고까지,
                 <br />
                 <span style={{ color: PRIMARY }}>현장에 맞는 업무 시스템</span>
                 을 구축합니다.
