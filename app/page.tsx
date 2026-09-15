@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
@@ -59,6 +59,95 @@ function FadeIn({
     >
       {children}
     </motion.div>
+  );
+}
+
+function DiagnosisIntroModal({
+  open,
+  onClose,
+}: {
+  open: boolean;
+  onClose: () => void;
+}) {
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const titleId = "diagnosis-intro-title";
+
+  useEffect(() => {
+    if (!open) return;
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onClose();
+    }
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [open, onClose]);
+
+  useEffect(() => {
+    if (open) closeButtonRef.current?.focus();
+  }, [open]);
+
+  if (!open) return null;
+
+  return (
+    <div
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center bg-black/40 p-0 sm:p-6"
+      onClick={onClose}
+    >
+      <div
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby={titleId}
+        className="bg-white w-full sm:max-w-md sm:rounded-2xl rounded-t-2xl p-6 sm:p-7"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="flex items-start justify-between gap-4 mb-3">
+          <h2
+            id={titleId}
+            className="text-lg sm:text-xl font-bold text-gray-900"
+            style={TITLE_STYLE}
+          >
+            실제 데이터 없이 업무 흐름부터 확인해 보세요
+          </h2>
+          <button
+            ref={closeButtonRef}
+            type="button"
+            onClick={onClose}
+            aria-label="닫기"
+            className="flex-shrink-0 p-1.5 -m-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-600 transition-colors"
+          >
+            <X size={18} />
+          </button>
+        </div>
+
+        <div className="text-sm text-gray-600 space-y-3 mb-6" style={BODY_STYLE}>
+          <p>
+            몇 가지 간단한 질문을 통해, 우리 회사에서 먼저 정리하면 좋은 업무
+            영역을 살펴볼 수 있습니다.
+          </p>
+          <p>회사명·고객 정보·직원 정보·거래처 정보는 입력하지 않아도 됩니다.</p>
+          <p>
+            이 진단은 상담 신청이나 계약을 위한 절차가 아닌, 현재 업무를
+            점검하기 위한 참고용입니다.
+          </p>
+        </div>
+
+        <div className="flex flex-col sm:flex-row gap-3">
+          <Link
+            href="/flow-check"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
+            style={{ backgroundColor: PRIMARY }}
+          >
+            진단 시작하기
+          </Link>
+          <button
+            type="button"
+            onClick={onClose}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-gray-600 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
+          >
+            나중에 할게요
+          </button>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -277,6 +366,8 @@ const CONTACT_MAILTO =
 const KAKAO_CHANNEL_URL = "https://pf.kakao.com/_AxdxexhX";
 
 export default function Home() {
+  const [showDiagnosisIntro, setShowDiagnosisIntro] = useState(false);
+
   return (
     <main className="font-sans">
       <Nav />
@@ -315,14 +406,15 @@ export default function Home() {
                 <span className="whitespace-nowrap">처리할 수 있는 운영 시스템으로 바꿉니다.</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-3">
-                <Link
-                  href="/flow-check"
+                <button
+                  type="button"
+                  onClick={() => setShowDiagnosisIntro(true)}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
                   style={{ backgroundColor: PRIMARY }}
                 >
                   우리 회사 업무 진단 받기
                   <ArrowRight size={15} />
-                </Link>
+                </button>
                 <a
                   href="#cases"
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
@@ -792,6 +884,11 @@ export default function Home() {
           </div>
         </div>
       </footer>
+
+      <DiagnosisIntroModal
+        open={showDiagnosisIntro}
+        onClose={() => setShowDiagnosisIntro(false)}
+      />
     </main>
   );
 }
