@@ -365,11 +365,25 @@ const CONTACT_MAILTO =
 
 const KAKAO_CHANNEL_URL = "https://pf.kakao.com/_AxdxexhX";
 
+const ORGANIZATION_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "오즈케이랩",
+  alternateName: "OZ.K Lab",
+  url: "https://ozklab.kr/",
+};
+
 export default function Home() {
   const [showDiagnosisIntro, setShowDiagnosisIntro] = useState(false);
 
   return (
     <main className="font-sans">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(ORGANIZATION_JSON_LD).replace(/</g, "\\u003c"),
+        }}
+      />
       <Nav />
 
       {/* ─── Hero ─── */}
@@ -706,7 +720,7 @@ export default function Home() {
                 style={BODY_STYLE}
               >
                 <p>
-                  OZ.K Lab은 작은 조직과 현장 실무자가 실제로 겪는 업무 문제를 이해하고,
+                  오즈케이랩(OZ.K Lab)은 작은 조직과 현장 실무자가 실제로 겪는 업무 문제를 이해하고,
                   고객관리, 업무흐름, 보고와 운영 데이터를 더 쉽게{" "}
                   <span className="whitespace-nowrap">연결하는 디지털 시스템을 설계합니다.</span>
                 </p>
