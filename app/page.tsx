@@ -22,6 +22,7 @@ import {
   GraduationCap,
   Menu,
   X,
+  Check,
 } from "lucide-react";
 
 const PRIMARY = "#E85D30";
@@ -250,6 +251,74 @@ function Nav() {
   );
 }
 
+function HeroMock() {
+  const steps = [
+    { label: "접수", note: "증상·첨부 등록", done: true },
+    { label: "점검·작업", note: "작업 내역 기록", done: true },
+    { label: "부품·비용 안내", note: "업체 안내문 작성", done: true },
+    { label: "발송", note: "이력에 자동 반영", done: false },
+  ];
+  return (
+    <div
+      aria-hidden="true"
+      className="rounded-2xl border border-gray-200 bg-white shadow-lg overflow-hidden"
+    >
+      <div className="flex items-center gap-1.5 px-4 py-2.5 border-b border-gray-100 bg-gray-50">
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
+        <span className="ml-3 text-xs font-medium text-gray-600">A/S 이력 조회</span>
+        <span className="ml-auto text-[11px] text-gray-500">예시 화면 · 가상 데이터</span>
+      </div>
+      <div className="p-4 sm:p-5">
+        <div className="flex gap-2 mb-5">
+          <div className="flex-1 flex items-center gap-2 rounded-lg border border-gray-200 px-3 py-2 text-sm text-gray-500">
+            <Search size={14} />
+            시리얼번호 SN-EXAMPLE-0001
+          </div>
+          <div
+            className="rounded-lg px-4 py-2 text-sm font-semibold text-white"
+            style={{ backgroundColor: PRIMARY }}
+          >
+            조회
+          </div>
+        </div>
+        <p className="text-xs font-semibold text-gray-500 mb-3">처리 이력</p>
+        <ol>
+          {steps.map((s, i) => (
+            <li key={i} className="relative flex gap-3 pb-3.5 last:pb-0">
+              {i < steps.length - 1 && (
+                <span className="absolute left-[11px] top-6 bottom-0 w-px bg-gray-200" />
+              )}
+              <span
+                className="relative z-10 shrink-0 w-6 h-6 rounded-full flex items-center justify-center"
+                style={
+                  s.done
+                    ? { backgroundColor: PRIMARY, color: "#fff" }
+                    : { backgroundColor: "#fff", border: `1.5px solid ${PRIMARY}` }
+                }
+              >
+                {s.done && <Check size={13} strokeWidth={3} />}
+              </span>
+              <div className="flex-1 flex items-baseline justify-between gap-3 -mt-0.5">
+                <span className="text-sm font-semibold text-gray-900">{s.label}</span>
+                <span className="text-xs text-gray-500">{s.note}</span>
+              </div>
+            </li>
+          ))}
+        </ol>
+        <div
+          className="mt-5 flex items-center gap-2 rounded-lg px-3 py-2.5 text-[13px] text-gray-700"
+          style={{ backgroundColor: `${PRIMARY}12` }}
+        >
+          <ClipboardList size={15} style={{ color: PRIMARY }} />
+          입력한 내용으로 오늘의 업무일지가 정리됩니다
+        </div>
+      </div>
+    </div>
+  );
+}
+
 const heroCards = [
   {
     icon: <Users size={18} />,
@@ -456,17 +525,21 @@ export default function Home() {
               transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
               className="flex flex-col gap-3"
             >
+              <div className="hidden md:block order-last lg:order-first">
+                <HeroMock />
+              </div>
               {heroCards.map((card, i) => (
                 <div
                   key={i}
-                  className="bg-white border border-gray-100 rounded-xl p-5 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200"
+                  className="bg-white border border-gray-100 rounded-xl p-4 shadow-sm hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 flex items-start gap-3"
                 >
                   <div
-                    className="w-8 h-8 rounded-lg flex items-center justify-center mb-3"
+                    className="w-8 h-8 shrink-0 rounded-lg flex items-center justify-center"
                     style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}
                   >
                     {card.icon}
                   </div>
+                  <div>
                   <p
                     className="text-sm font-semibold text-gray-900 mb-1"
                     style={{ wordBreak: "keep-all" }}
@@ -479,6 +552,7 @@ export default function Home() {
                   >
                     {card.desc}
                   </p>
+                  </div>
                 </div>
               ))}
             </motion.div>
@@ -605,62 +679,58 @@ export default function Home() {
           </FadeIn>
 
           <div className="grid md:grid-cols-2 gap-6">
-            {caseStudies.map((item, i) => (
-              <FadeIn key={i} delay={i * 0.1}>
-                <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 h-full flex flex-col">
-                  <h3
-                    className="text-lg font-bold text-gray-900 mb-4"
-                    style={{ wordBreak: "keep-all" }}
-                  >
-                    {item.title}
-                  </h3>
-                  <div className="space-y-4 flex-1">
-                    <div>
-                      <p
-                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
-                        style={{ color: PRIMARY }}
-                      >
-                        {item.problemLabel}
-                      </p>
-                      <p
-                        className="text-sm text-gray-600"
-                        style={BODY_STYLE}
-                      >
-                        {item.problem}
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
-                        style={{ color: PRIMARY }}
-                      >
-                        {item.approachLabel}
-                      </p>
-                      <p
-                        className="text-sm text-gray-600"
-                        style={BODY_STYLE}
-                      >
-                        {item.approach}
-                      </p>
-                    </div>
-                    <div>
-                      <p
-                        className="text-xs font-semibold tracking-widest uppercase mb-1.5"
-                        style={{ color: PRIMARY }}
-                      >
-                        {item.valueLabel}
-                      </p>
-                      <p
-                        className="text-sm text-gray-600"
-                        style={BODY_STYLE}
-                      >
-                        {item.value}
-                      </p>
-                    </div>
+            {caseStudies.map((item, i) => {
+              const steps = [
+                { label: item.problemLabel, text: item.problem },
+                { label: item.approachLabel, text: item.approach },
+                { label: item.valueLabel, text: item.value },
+              ];
+              return (
+                <FadeIn key={i} delay={i * 0.1}>
+                  <div className="bg-white border border-gray-100 rounded-2xl p-6 sm:p-7 h-full flex flex-col">
+                    <h3
+                      className="text-lg font-bold text-gray-900 mb-5"
+                      style={{ wordBreak: "keep-all" }}
+                    >
+                      {item.title}
+                    </h3>
+                    <ol className="flex-1">
+                      {steps.map((s, j) => (
+                        <li key={j} className="relative flex gap-4 pb-5 last:pb-0">
+                          {j < steps.length - 1 && (
+                            <span
+                              aria-hidden="true"
+                              className="absolute left-[13px] top-7 bottom-0 w-px bg-gray-200"
+                            />
+                          )}
+                          <span
+                            aria-hidden="true"
+                            className="relative z-10 shrink-0 w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold"
+                            style={{ backgroundColor: `${PRIMARY}18`, color: PRIMARY }}
+                          >
+                            {j + 1}
+                          </span>
+                          <div
+                            className={j === 2 ? "flex-1 rounded-xl px-4 py-3 -mt-1" : "flex-1"}
+                            style={j === 2 ? { backgroundColor: `${PRIMARY}0D` } : undefined}
+                          >
+                            <p
+                              className="text-xs font-semibold tracking-widest mb-1"
+                              style={{ color: PRIMARY }}
+                            >
+                              {s.label}
+                            </p>
+                            <p className="text-sm text-gray-600" style={BODY_STYLE}>
+                              {s.text}
+                            </p>
+                          </div>
+                        </li>
+                      ))}
+                    </ol>
                   </div>
-                </div>
-              </FadeIn>
-            ))}
+                </FadeIn>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -686,9 +756,16 @@ export default function Home() {
             {processSteps.map((item, i) => (
               <FadeIn key={i} delay={i * 0.1}>
                 <div className="relative bg-white border border-gray-100 rounded-2xl p-6 hover:shadow-md hover:-translate-y-1 transition-all duration-300 h-full">
-                  <div className="absolute top-5 right-5 text-3xl font-black text-gray-50 select-none">
+                  <div className="absolute top-5 right-5 text-3xl font-black text-gray-200 select-none">
                     {item.step}
                   </div>
+                  {i < processSteps.length - 1 && (
+                    <ChevronRight
+                      aria-hidden="true"
+                      size={18}
+                      className="hidden md:block absolute top-1/2 -right-[21px] -translate-y-1/2 text-gray-300"
+                    />
+                  )}
                   <div
                     className="w-11 h-11 rounded-xl flex items-center justify-center mb-4"
                     style={{ backgroundColor: `${PRIMARY}15`, color: PRIMARY }}
@@ -792,7 +869,7 @@ export default function Home() {
       </section>
 
       {/* ─── 상담 신청 ─── */}
-      <section id="contact" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      <section id="contact" className="py-16 sm:py-20" style={{ backgroundColor: "#111827" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <FadeIn>
             <div className="max-w-xl mx-auto text-center">
@@ -803,7 +880,7 @@ export default function Home() {
                 Contact
               </p>
               <h2
-                className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6 max-w-sm mx-auto"
+                className="text-2xl sm:text-3xl font-bold text-white mb-6 max-w-sm mx-auto"
                 style={{
                   lineHeight: "1.35",
                   letterSpacing: "-0.01em",
@@ -818,7 +895,7 @@ export default function Home() {
                 함께 살펴보겠습니다.
               </h2>
               <p
-                className="text-gray-500 mb-8 text-sm sm:text-base"
+                className="text-gray-300 mb-8 text-sm sm:text-base"
                 style={{ lineHeight: "1.9", wordBreak: "keep-all" }}
               >
                 고객관리, A/S·QC, 업무일지, 보고 자동화처럼 반복되는 업무가 있다면{" "}
@@ -839,7 +916,7 @@ export default function Home() {
                   </a>
                   <a
                     href={CONTACT_MAILTO}
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-gray-700 border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-all text-sm"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-semibold text-white border border-white/30 hover:border-white/60 hover:bg-white/10 transition-all text-base"
                   >
                     <Mail size={15} />
                     상담 문의하기
