@@ -268,7 +268,7 @@ function HeroMock() {
         <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
         <span className="w-2.5 h-2.5 rounded-full bg-gray-300" />
         <span className="ml-3 text-xs font-medium text-gray-600">A/S 이력 조회</span>
-        <span className="ml-auto text-[11px] text-gray-500">예시 화면 · 가상 데이터</span>
+        <span className="ml-auto rounded-full bg-gray-200 px-2.5 py-0.5 text-xs font-medium text-gray-700">예시 화면 · 가상 데이터</span>
       </div>
       <div className="p-4 sm:p-5">
         <div className="flex gap-2 mb-5">
