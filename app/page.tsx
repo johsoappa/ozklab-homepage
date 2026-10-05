@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { MotionConfig, motion } from "framer-motion";
 import {
   Users,
   Wrench,
@@ -25,6 +25,8 @@ import {
 } from "lucide-react";
 
 const PRIMARY = "#E85D30";
+// 흰 글씨 버튼·작은 링크용 (흰 배경 대비 4.5:1 이상)
+const PRIMARY_STRONG = "#CC4519";
 
 /* 한글 대제목 공통 규칙 — letter-spacing -0.03em, line-height 1.32, keep-all, balance */
 const TITLE_STYLE: React.CSSProperties = {
@@ -134,7 +136,7 @@ function DiagnosisIntroModal({
           <Link
             href="/flow-check"
             className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
-            style={{ backgroundColor: PRIMARY }}
+            style={{ backgroundColor: PRIMARY_STRONG }}
           >
             진단 시작하기
           </Link>
@@ -177,7 +179,7 @@ function Nav() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="font-bold text-xl text-gray-900">
+          <a href="#" className="inline-flex items-center gap-[0.25em] min-h-11 font-bold text-xl text-gray-900">
             OZ.K <span style={{ color: PRIMARY }}>Lab</span>
           </a>
 
@@ -195,20 +197,29 @@ function Nav() {
             <a
               href="#contact"
               className="ml-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: PRIMARY }}
+              style={{ backgroundColor: PRIMARY_STRONG }}
             >
               상담 신청
             </a>
           </div>
 
           {/* Mobile toggle */}
-          <button
-            className="md:hidden p-2 rounded-md text-gray-600"
-            onClick={() => setMenuOpen(!menuOpen)}
-            aria-label="메뉴 열기"
-          >
-            {menuOpen ? <X size={20} /> : <Menu size={20} />}
-          </button>
+          <div className="md:hidden flex items-center gap-1">
+            <a
+              href="#contact"
+              className="px-3 min-h-11 inline-flex items-center rounded-lg text-sm font-medium text-white"
+              style={{ backgroundColor: PRIMARY_STRONG }}
+            >
+              상담 신청
+            </a>
+            <button
+              className="w-11 h-11 inline-flex items-center justify-center rounded-md text-gray-600"
+              onClick={() => setMenuOpen(!menuOpen)}
+              aria-label={menuOpen ? "메뉴 닫기" : "메뉴 열기"}
+            >
+              {menuOpen ? <X size={20} /> : <Menu size={20} />}
+            </button>
+          </div>
         </div>
 
         {/* Mobile menu */}
@@ -228,7 +239,7 @@ function Nav() {
               <a
                 href="#contact"
                 className="block text-center px-4 py-2.5 rounded-lg text-sm font-medium text-white"
-                style={{ backgroundColor: PRIMARY }}
+                style={{ backgroundColor: PRIMARY_STRONG }}
                 onClick={() => setMenuOpen(false)}
               >
                 상담 신청
@@ -377,6 +388,7 @@ export default function Home() {
   const [showDiagnosisIntro, setShowDiagnosisIntro] = useState(false);
 
   return (
+    <MotionConfig reducedMotion="user">
     <main className="font-sans">
       <script
         type="application/ld+json"
@@ -395,9 +407,9 @@ export default function Home() {
           <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
             {/* Left: text */}
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, ease: "easeOut" }}
+              initial={{ y: 12 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.3, ease: "easeOut" }}
             >
               <div
                 className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-semibold mb-6"
@@ -424,7 +436,7 @@ export default function Home() {
                   type="button"
                   onClick={() => setShowDiagnosisIntro(true)}
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
-                  style={{ backgroundColor: PRIMARY }}
+                  style={{ backgroundColor: PRIMARY_STRONG }}
                 >
                   우리 회사 업무 진단 받기
                   <ArrowRight size={15} />
@@ -441,9 +453,9 @@ export default function Home() {
 
             {/* Right: problem-solving cards */}
             <motion.div
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.65, delay: 0.15, ease: "easeOut" }}
+              transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
               className="flex flex-col gap-3"
             >
               {heroCards.map((card, i) => (
@@ -464,7 +476,7 @@ export default function Home() {
                     {card.title}
                   </p>
                   <p
-                    className="text-xs text-gray-500"
+                    className="text-[13px] text-gray-500"
                     style={{ lineHeight: "1.65", wordBreak: "keep-all" }}
                   >
                     {card.desc}
@@ -769,8 +781,8 @@ export default function Home() {
                     href="https://꿈따라.kr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 text-sm font-medium hover:gap-2 transition-all duration-200"
-                    style={{ color: PRIMARY }}
+                    className="inline-flex items-center gap-1 py-3 text-sm font-medium hover:gap-2 transition-all duration-200"
+                    style={{ color: PRIMARY_STRONG }}
                   >
                     꿈따라 보러가기 <ArrowRight size={14} />
                   </a>
@@ -822,7 +834,7 @@ export default function Home() {
                     rel="noopener noreferrer"
                     aria-label="카카오톡 채널에서 OZ.K Lab 상담 시작하기 (새 창 열림)"
                     className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: PRIMARY }}
+                    style={{ backgroundColor: PRIMARY_STRONG }}
                   >
                     <MessageCircle size={15} />
                     카카오톡 상담 시작
@@ -837,8 +849,8 @@ export default function Home() {
                 </div>
                 <a
                   href={CONTACT_MAILTO}
-                  className="text-sm text-gray-400 hover:underline transition-colors"
-                  style={{ color: PRIMARY }}
+                  className="inline-block py-3 text-sm hover:underline transition-colors"
+                  style={{ color: PRIMARY_STRONG }}
                 >
                   contact@ozklab.com
                 </a>
@@ -866,7 +878,7 @@ export default function Home() {
             </div>
 
             <div className="text-sm">
-              <p className="text-xs font-semibold text-gray-400 uppercase tracking-widest mb-4">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
                 서비스
               </p>
               <div className="space-y-3">
@@ -875,23 +887,23 @@ export default function Home() {
                     href="https://꿈따라.kr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="font-medium text-gray-700 hover:text-gray-900 transition-colors"
+                    className="inline-block py-3 font-medium text-gray-700 hover:text-gray-900 transition-colors"
                   >
                     꿈따라
                   </a>
-                  <p className="text-xs text-gray-400 mt-0.5">자녀 진로탐색 서비스</p>
+                  <p className="text-xs text-gray-500 mt-0.5">자녀 진로탐색 서비스</p>
                 </div>
               </div>
             </div>
           </div>
 
           <div className="mt-8 pt-6 border-t border-gray-100 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
-            <p className="text-xs text-gray-400 whitespace-nowrap">
+            <p className="text-xs text-gray-500 whitespace-nowrap">
               © 오즈케이랩(OZ.K Lab). All rights reserved.
             </p>
             <a
               href="mailto:contact@ozklab.com"
-              className="text-xs text-gray-400 hover:underline transition-colors"
+              className="inline-block py-3 text-xs text-gray-500 hover:underline transition-colors"
             >
               contact@ozklab.com
             </a>
@@ -904,5 +916,6 @@ export default function Home() {
         onClose={() => setShowDiagnosisIntro(false)}
       />
     </main>
+    </MotionConfig>
   );
 }
