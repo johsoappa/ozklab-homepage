@@ -25,8 +25,6 @@ import {
 } from "lucide-react";
 
 const PRIMARY = "#E85D30";
-// 흰 글씨 버튼·작은 링크용 (흰 배경 대비 4.5:1 이상)
-const PRIMARY_STRONG = "#CC4519";
 
 /* 한글 대제목 공통 규칙 — letter-spacing -0.03em, line-height 1.32, keep-all, balance */
 const TITLE_STYLE: React.CSSProperties = {
@@ -135,8 +133,8 @@ function DiagnosisIntroModal({
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/flow-check"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
-            style={{ backgroundColor: PRIMARY_STRONG }}
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-base transition-opacity hover:opacity-90"
+            style={{ backgroundColor: PRIMARY }}
           >
             진단 시작하기
           </Link>
@@ -196,8 +194,8 @@ function Nav() {
             ))}
             <a
               href="#contact"
-              className="ml-2 px-4 py-2 rounded-lg text-sm font-medium text-white transition-opacity hover:opacity-90"
-              style={{ backgroundColor: PRIMARY_STRONG }}
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              style={{ backgroundColor: PRIMARY }}
             >
               상담 신청
             </a>
@@ -207,8 +205,8 @@ function Nav() {
           <div className="md:hidden flex items-center gap-1">
             <a
               href="#contact"
-              className="px-3 min-h-11 inline-flex items-center rounded-lg text-sm font-medium text-white"
-              style={{ backgroundColor: PRIMARY_STRONG }}
+              className="px-3 min-h-11 inline-flex items-center rounded-lg text-sm font-semibold text-white"
+              style={{ backgroundColor: PRIMARY }}
             >
               상담 신청
             </a>
@@ -238,8 +236,8 @@ function Nav() {
             <div className="px-4 pt-2">
               <a
                 href="#contact"
-                className="block text-center px-4 py-2.5 rounded-lg text-sm font-medium text-white"
-                style={{ backgroundColor: PRIMARY_STRONG }}
+                className="block text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white"
+                style={{ backgroundColor: PRIMARY }}
                 onClick={() => setMenuOpen(false)}
               >
                 상담 신청
@@ -435,8 +433,8 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setShowDiagnosisIntro(true)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium text-white transition-opacity hover:opacity-90 text-sm"
-                  style={{ backgroundColor: PRIMARY_STRONG }}
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90 text-base"
+                  style={{ backgroundColor: PRIMARY }}
                 >
                   우리 회사 업무 진단 받기
                   <ArrowRight size={15} />
@@ -781,8 +779,8 @@ export default function Home() {
                     href="https://꿈따라.kr"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 py-3 text-sm font-medium hover:gap-2 transition-all duration-200"
-                    style={{ color: PRIMARY_STRONG }}
+                    className="inline-flex items-center gap-1 py-3 text-sm font-semibold hover:gap-2 transition-all duration-200"
+                    style={{ color: PRIMARY }}
                   >
                     꿈따라 보러가기 <ArrowRight size={14} />
                   </a>
@@ -833,8 +831,8 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="카카오톡 채널에서 OZ.K Lab 상담 시작하기 (새 창 열림)"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-medium text-white text-sm transition-opacity hover:opacity-90"
-                    style={{ backgroundColor: PRIMARY_STRONG }}
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-semibold text-white text-base transition-opacity hover:opacity-90"
+                    style={{ backgroundColor: PRIMARY }}
                   >
                     <MessageCircle size={15} />
                     카카오톡 상담 시작
@@ -849,8 +847,8 @@ export default function Home() {
                 </div>
                 <a
                   href={CONTACT_MAILTO}
-                  className="inline-block py-3 text-sm hover:underline transition-colors"
-                  style={{ color: PRIMARY_STRONG }}
+                  className="inline-block py-3 text-sm font-semibold hover:underline transition-colors"
+                  style={{ color: PRIMARY }}
                 >
                   contact@ozklab.com
                 </a>
