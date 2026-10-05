@@ -134,7 +134,7 @@ function DiagnosisIntroModal({
         <div className="flex flex-col sm:flex-row gap-3">
           <Link
             href="/flow-check"
-            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white text-base transition-opacity hover:opacity-90"
+            className="flex-1 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-[#111827] text-base transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
             style={{ backgroundColor: PRIMARY }}
           >
             진단 시작하기
@@ -195,7 +195,7 @@ function Nav() {
             ))}
             <a
               href="#contact"
-              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold text-white transition-opacity hover:opacity-90"
+              className="ml-2 px-4 py-2 rounded-lg text-sm font-semibold text-[#111827] transition-opacity hover:opacity-90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
               style={{ backgroundColor: PRIMARY }}
             >
               상담 신청
@@ -206,7 +206,7 @@ function Nav() {
           <div className="md:hidden flex items-center gap-1">
             <a
               href="#contact"
-              className="px-3 min-h-11 inline-flex items-center rounded-lg text-sm font-semibold text-white"
+              className="px-3 min-h-11 inline-flex items-center rounded-lg text-sm font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
               style={{ backgroundColor: PRIMARY }}
             >
               상담 신청
@@ -237,7 +237,7 @@ function Nav() {
             <div className="px-4 pt-2">
               <a
                 href="#contact"
-                className="block text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-white"
+                className="block text-center px-4 py-2.5 rounded-lg text-sm font-semibold text-[#111827] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
                 style={{ backgroundColor: PRIMARY }}
                 onClick={() => setMenuOpen(false)}
               >
@@ -277,7 +277,7 @@ function HeroMock() {
             시리얼번호 SN-EXAMPLE-0001
           </div>
           <div
-            className="rounded-lg px-4 py-2 text-sm font-semibold text-white"
+            className="rounded-lg px-4 py-2 text-sm font-semibold text-[#111827]"
             style={{ backgroundColor: PRIMARY }}
           >
             조회
@@ -502,7 +502,7 @@ export default function Home() {
                 <button
                   type="button"
                   onClick={() => setShowDiagnosisIntro(true)}
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-white transition-opacity hover:opacity-90 text-base"
+                  className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-[#111827] transition-opacity hover:opacity-90 text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
                   style={{ backgroundColor: PRIMARY }}
                 >
                   우리 회사 업무 진단 받기
@@ -908,7 +908,7 @@ export default function Home() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="카카오톡 채널에서 OZ.K Lab 상담 시작하기 (새 창 열림)"
-                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-semibold text-white text-base transition-opacity hover:opacity-90"
+                    className="inline-flex items-center justify-center gap-2 px-7 py-3 rounded-xl font-semibold text-[#111827] text-base transition hover:brightness-110 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
                     style={{ backgroundColor: PRIMARY }}
                   >
                     <MessageCircle size={15} />
