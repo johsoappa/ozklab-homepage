@@ -27,6 +27,9 @@ export const metadata: Metadata = {
     type: "website",
   },
   metadataBase: new URL("https://ozklab.kr"),
+  alternates: {
+    canonical: "/",
+  },
   verification: {
     google: "6g7Khas70m8f96ZFXTxqOPpHrqkL-zQGdtte20h609g",
     other: {

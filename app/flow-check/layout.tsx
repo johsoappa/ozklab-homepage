@@ -4,6 +4,9 @@ export const metadata: Metadata = {
   title: "OZ.K Flow Check | 3분 업무자동화 자가진단 - OZ.K Lab",
   description:
     "3분 진단으로 반복 업무, 누락 위험, 현재 업무 흐름을 확인하고 OZ.K Lab의 권장 자동화 도입 방향을 무료로 받아보세요.",
+  alternates: {
+    canonical: "/flow-check",
+  },
   openGraph: {
     title: "OZ.K Flow Check | 3분 업무자동화 자가진단",
     description:
