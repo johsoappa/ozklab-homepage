@@ -23,6 +23,8 @@ import {
   Menu,
   X,
   Check,
+  Clock,
+  ChevronDown,
 } from "lucide-react";
 
 const PRIMARY = "#E85D30";
@@ -168,6 +170,7 @@ function Nav() {
     { href: "#cases", label: "구축 사례" },
     { href: "#process", label: "도입 절차" },
     { href: "#services", label: "운영 서비스" },
+    { href: "#faq", label: "자주 묻는 질문" },
   ];
 
   return (
@@ -178,7 +181,7 @@ function Nav() {
     >
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <a href="#" className="inline-flex items-center gap-[0.25em] min-h-11 font-bold text-xl text-gray-900">
+          <a href="#hero" className="inline-flex items-center gap-[0.25em] min-h-11 font-bold text-xl text-gray-900">
             OZ.K <span style={{ color: PRIMARY }}>Lab</span>
           </a>
 
@@ -437,6 +440,154 @@ const processSteps = [
   },
 ];
 
+/* TODO(대표님 확인): 실제 운영 시간·답변 목표 시간에 맞게 수정 */
+const RESPONSE_INFO = "운영 시간 평일 10:00 ~ 18:00 · 문의 시 2시간 이내 답변 가능 (운영 시간 외 문의는 다음 영업일에 확인합니다)";
+
+const faqItems = [
+  {
+    q: "어떤 순서로 진행되나요?",
+    a: "업무 진단 → 구조 설계 → 구축·테스트 → 운영 개선 순서로 진행합니다. 먼저 현재 사용하는 자료와 담당자별 입력 흐름을 확인한 뒤, 우선순위에 맞게 범위를 정합니다.",
+  },
+  {
+    q: "지금 쓰는 엑셀·구글시트를 그대로 활용할 수 있나요?",
+    a: "대부분 현재 자료를 출발점으로 삼습니다. 기존 시트의 항목과 입력 방식을 분석해, 새 시스템으로 옮길 범위와 그대로 둘 부분을 상담에서 함께 정합니다.",
+  },
+  {
+    q: "비용과 기간은 어떻게 정해지나요?",
+    a: "구축 범위, 사용 인원, 기존 자료 이전 여부 등에 따라 달라져 고정 가격표를 두지 않습니다. 업무 진단 후 범위를 정리해 견적과 일정을 안내해 드립니다.",
+  },
+  {
+    q: "상담을 신청하면 바로 계약해야 하나요?",
+    a: "아닙니다. 상담과 업무 진단은 현재 업무를 점검하는 단계이며, 상담 신청만으로 계약이 진행되지 않습니다. 범위와 조건은 상담 후 견적서·계약서로 확인하실 수 있습니다.",
+  },
+  {
+    q: "업무 진단에 회사나 고객 정보를 입력해야 하나요?",
+    a: "입력하지 않으셔도 됩니다. 회사명·고객 정보·직원 정보·거래처 정보 없이 질문에 답하는 방식이며, 응답 내용은 서버로 전송되지 않고 브라우저 화면에서만 처리됩니다.",
+  },
+];
+
+const FAQ_JSON_LD = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map((f) => ({
+    "@type": "Question",
+    name: f.q,
+    acceptedAnswer: { "@type": "Answer", text: f.a },
+  })),
+};
+
+function FaqSection() {
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
+
+  return (
+    <section id="faq" className="py-16 sm:py-20" style={{ backgroundColor: "#F8F9FA" }}>
+      <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        <FadeIn>
+          <div className="mb-8">
+            <p
+              className="text-xs font-semibold tracking-widest uppercase mb-3"
+              style={{ color: PRIMARY }}
+            >
+              FAQ
+            </p>
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900" style={TITLE_STYLE}>
+              시작 전에 자주 묻는 질문
+            </h2>
+          </div>
+        </FadeIn>
+
+        <div className="space-y-3">
+          {faqItems.map((item, i) => {
+            const open = openIndex === i;
+            return (
+              <div key={i} className="bg-white border border-gray-100 rounded-2xl">
+                <h3>
+                  <button
+                    type="button"
+                    id={`faq-q-${i}`}
+                    aria-expanded={open}
+                    aria-controls={`faq-a-${i}`}
+                    onClick={() => setOpenIndex(open ? null : i)}
+                    className="w-full min-h-14 flex items-center justify-between gap-4 px-5 py-4 text-left font-semibold text-gray-900 text-[15px] rounded-2xl focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
+                    style={{ wordBreak: "keep-all" }}
+                  >
+                    {item.q}
+                    <ChevronDown
+                      size={18}
+                      aria-hidden="true"
+                      className={`shrink-0 text-gray-500 transition-transform duration-300 motion-reduce:transition-none ${
+                        open ? "rotate-180" : ""
+                      }`}
+                    />
+                  </button>
+                </h3>
+                <div
+                  id={`faq-a-${i}`}
+                  role="region"
+                  aria-labelledby={`faq-q-${i}`}
+                  className={`grid transition-[grid-template-rows] duration-300 ease-out motion-reduce:transition-none ${
+                    open ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                  }`}
+                >
+                  <div className="overflow-hidden">
+                    <p className="px-5 pb-5 text-sm text-gray-600" style={BODY_STYLE}>
+                      {item.a}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/* 모바일(768px 미만) 하단 고정 CTA — 히어로를 지나면 나타나고, 상담 섹션이 보이면 숨긴다 */
+function MobileStickyCta({ onClick }: { onClick: () => void }) {
+  const [pastHero, setPastHero] = useState(false);
+  const [contactVisible, setContactVisible] = useState(false);
+
+  useEffect(() => {
+    const onScroll = () => setPastHero(window.scrollY > 480);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  useEffect(() => {
+    const el = document.getElementById("contact");
+    if (!el) return;
+    const io = new IntersectionObserver(([entry]) => setContactVisible(entry.isIntersecting));
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  const show = pastHero && !contactVisible;
+
+  return (
+    <div
+      aria-hidden={!show}
+      className={`md:hidden fixed inset-x-0 bottom-0 z-40 px-4 pt-3 bg-white/95 backdrop-blur border-t border-gray-100 transition-transform duration-300 motion-reduce:transition-none ${
+        show ? "translate-y-0" : "translate-y-full"
+      }`}
+      style={{ paddingBottom: "max(0.75rem, env(safe-area-inset-bottom))" }}
+    >
+      <button
+        type="button"
+        tabIndex={show ? 0 : -1}
+        onClick={onClick}
+        className="w-full min-h-12 inline-flex items-center justify-center gap-2 rounded-xl font-semibold text-[#111827] text-base focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#E85D30]"
+        style={{ backgroundColor: PRIMARY }}
+      >
+        우리 회사 업무 진단 받기
+        <ArrowRight size={15} />
+      </button>
+    </div>
+  );
+}
+
 const CONTACT_MAILTO =
   "mailto:contact@ozklab.com?subject=" +
   encodeURIComponent("[OZ.K Lab] 업무 시스템 구축 상담 문의");
@@ -461,6 +612,12 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(ORGANIZATION_JSON_LD).replace(/</g, "\\u003c"),
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(FAQ_JSON_LD).replace(/</g, "\\u003c"),
         }}
       />
       <Nav />
@@ -868,6 +1025,8 @@ export default function Home() {
         </div>
       </section>
 
+      <FaqSection />
+
       {/* ─── 상담 신청 ─── */}
       <section id="contact" className="py-16 sm:py-20" style={{ backgroundColor: "#111827" }}>
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -929,6 +1088,13 @@ export default function Home() {
                 >
                   contact@ozklab.com
                 </a>
+                <p
+                  className="flex items-start justify-center gap-2 text-[13px] text-gray-300 max-w-sm"
+                  style={{ lineHeight: "1.7", wordBreak: "keep-all" }}
+                >
+                  <Clock size={14} aria-hidden="true" className="mt-1 shrink-0" />
+                  {RESPONSE_INFO}
+                </p>
               </div>
             </div>
           </FadeIn>
@@ -936,7 +1102,7 @@ export default function Home() {
       </section>
 
       {/* ─── Footer ─── */}
-      <footer className="py-12 border-t border-gray-100 bg-white">
+      <footer className="py-12 pb-28 md:pb-12 border-t border-gray-100 bg-white">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row justify-between gap-8">
             <div className="max-w-[280px]">
@@ -953,6 +1119,15 @@ export default function Home() {
             </div>
 
             <div className="text-sm">
+              <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-1">
+                문의 안내
+              </p>
+              <p
+                className="text-xs text-gray-500 max-w-[260px] mb-6"
+                style={{ lineHeight: "1.7", wordBreak: "keep-all" }}
+              >
+                {RESPONSE_INFO}
+              </p>
               <p className="text-xs font-semibold text-gray-500 uppercase tracking-widest mb-4">
                 서비스
               </p>
@@ -976,15 +1151,31 @@ export default function Home() {
             <p className="text-xs text-gray-500 whitespace-nowrap">
               © 오즈케이랩(OZ.K Lab). All rights reserved.
             </p>
-            <a
-              href="mailto:contact@ozklab.com"
-              className="inline-block py-3 text-xs text-gray-500 hover:underline transition-colors"
-            >
-              contact@ozklab.com
-            </a>
+            <div className="flex flex-wrap items-center gap-x-5">
+              <Link
+                href="/terms"
+                className="inline-block py-3 text-xs text-gray-500 hover:underline transition-colors"
+              >
+                이용약관
+              </Link>
+              <Link
+                href="/privacy"
+                className="inline-block py-3 text-xs font-semibold text-gray-700 hover:underline transition-colors"
+              >
+                개인정보 처리방침
+              </Link>
+              <a
+                href="mailto:contact@ozklab.com"
+                className="inline-block py-3 text-xs text-gray-500 hover:underline transition-colors"
+              >
+                contact@ozklab.com
+              </a>
+            </div>
           </div>
         </div>
       </footer>
+
+      <MobileStickyCta onClick={() => setShowDiagnosisIntro(true)} />
 
       <DiagnosisIntroModal
         open={showDiagnosisIntro}
